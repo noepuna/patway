@@ -1,0 +1,67 @@
+<nav aria-label="breadcrumb">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="#" [routerLink]="['/backoffice/admin/department/search']">Department</a></li>
+	  <li class="breadcrumb-item active" aria-current="page">Update</li>
+	</ol>
+</nav>
+<div class="card">
+	<header class="card-header">
+		<div class="row">
+			<div class="col-md-8">UPDATE DEPARTMENT</div>
+		</div>
+	</header>
+	<div class="card-body">
+		<div class="container">
+			<div class="h2 text-center" [class.text-danger]="formErrors" [class.text-success]="updateFlag">OFFICE DEPARTMENT</div>
+			<div class="text-success" *ngIf="updateFlag">Update complete!</div>
+			<form method="post" enctype="multipart/form-data" class="mt-2" (submit)="update()">
+				<div class="row form-group">
+					<div class="col-md-12">
+						<div class="form-group mb-2">
+							<label>NAME: <span class="text-danger">*</span></label>
+							<input
+								type="text"
+								name="name"
+								class="form-control border"
+								placeholder="Enter name.."
+								[(ngModel)]="iDepartment.name"
+								[class.is-invalid]="formErrors?.office_department?.name"
+							/>
+							<div *ngIf="formErrors?.office_department?.name as nameErr" class="invalid-feedback">{{nameErr}}</div>
+						</div>
+						<div class="form-group mb-2">
+							<label>DESCRIPTION:</label>
+							<textarea
+								name="description"
+								class="form-control"
+								rows="3"
+								placeholder="Description here..."
+								[(ngModel)]="iDepartment.description"
+								[class.is-invalid]="formErrors?.office_department?.description">
+							</textarea>
+							<div *ngIf="formErrors?.office_department?.description as descriptionErr" class="invalid-feedback">{{descriptionErr}}</div>
+						</div>
+						<div class="form-group mb-2">
+							<div class="form-check">
+								<input
+									#enabledEl
+									name="enabled"
+									type="checkbox"
+									class="form-check-input"
+									[checked]="iDepartment.enabled"
+									(change)="iDepartment.enabled = enabledEl.checked"
+								/>
+								<label class="form-check-label" for="flexCheckDefault">Enabled</label>
+								<div *ngIf="formErrors?.office_department?.description as descriptionErr" class="invalid-feedback">{{descriptionErr}}</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<button class="btn btn-primary mr-2" type="submit">Submit</button>
+						</div>
+					</div>
+				</div>
+				
+			</form>
+		</div>
+	</div>
+</div>

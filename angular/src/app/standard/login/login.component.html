@@ -1,0 +1,60 @@
+<div class="row">
+	<div class="col-md-5">
+		<div class="bg-light p-4">
+			<form method="post" (submit)="login(); false">
+				<div class="d-flex justify-content-center">
+					<img src="assets/img/login-logo.png" class="img-fluid" alt="">
+				</div>
+				<p class="h3 text-center font-weight-bold" [class.text-danger]="authToken === null || loginErrors">SIGN IN
+				<div class="form-group mb-2">
+					<label class="d-none">Auth Token</label>
+					<input
+						type="text" readonly
+						class="form-control-plaintext d-none"
+						[class.is-invalid]="authToken === null"
+					>
+					<div class="invalid-feedback">Login Failed</div>
+				</div>
+				<div class="form-group mb-2">
+					<label>Username <span class="text-danger">*</span></label>
+					<input
+						type="text"
+						class="form-control"
+						placeholder="username"
+						name="username"
+						[(ngModel)]="param.username"
+						[class.is-invalid]="loginErrors?.auth?.username"
+					>
+					<div *ngIf="loginErrors?.auth?.username" class="invalid-feedback">{{loginErrors.auth.username}}</div>
+				</div>
+				<div class="form-group mb-1">
+					<label>Password <span class="text-danger">*</span></label>
+					<input
+						type="password"
+						class="form-control"
+						placeholder="******"
+						name="password"
+						[(ngModel)]="param.password"
+						[class.is-invalid]="loginErrors?.auth?.password"
+					>
+					<div *ngIf="loginErrors?.auth?.password" class="invalid-feedback">{{loginErrors.auth.password}}</div>
+				</div>
+				<div class="form-group mb-2">
+					<small class="d-flex justify-content-between">
+						<a href="" class="link footer-link">Reset password</a>
+						<a href="" class="link footer-link">Need Help?</a>
+					</small>
+				</div>
+				<div class="d-grid">
+					<button
+					type="submit"
+					class="btn btn-primary"
+					[class.btn-danger]="loginErrors?.login_attempt"
+					[class.disabled]="loginXHR">Login
+				</button>
+				<p *ngIf="loginErrors?.login_attempt" class="text-danger">{{loginErrors.login_attempt}}</p>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

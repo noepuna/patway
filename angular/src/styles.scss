@@ -1,0 +1,67 @@
+.pageUnderline {
+    margin: .5em auto 2rem;
+    width: 150px;
+    border: 2px solid #ff9500;
+    opacity: 1;
+}
+
+.heading-2 {
+    color: #86a0ff;
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0 auto .5rem;
+    padding-top: 0;
+    line-height: 2.5rem;
+    text-transform: uppercase;
+}
+.heading-4 {
+    font-size: 1.6rem;
+    color: #86a0ff;
+    margin: 0;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+.heading5 {
+    color: #ff9500;
+    font-weight: bold;
+    opacity: 1;
+}
+
+.iconLink {
+    text-decoration: none;
+}
+.iconLink:hover {
+    opacity: .5;
+}
+a.iconLink img {
+    width: 60px!important;
+    margin-bottom: .5rem;
+}
+
+.iconLink i {
+    width: 100%;
+    font-size: 3rem;
+    margin-bottom: .5rem;
+    color: #01478a;
+}
+.iconLink p {
+    margin-top: 0;
+    color: #ff9500; 
+}
+
+.iconLinkNotDone {
+    text-decoration: none;
+    color: #ababab;   
+    cursor: not-allowed;
+}
+.iconLinkNotDone img {
+    width: 100px;
+}
+
+// icon pages
+.icon-blocks {
+    height: 50px;
+}
+.yellow-orange-color {
+    color: #ff9500;
+}

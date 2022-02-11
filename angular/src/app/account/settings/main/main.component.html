@@ -1,0 +1,22 @@
+<nav aria-label="breadcrumb">
+	<ol class="breadcrumb">
+	  <li class="breadcrumb-item active" aria-current="page">Account Settings</li>
+	</ol>
+</nav>
+<div class="row">
+	<div class="col mb-3">
+		<ul class="list-group">
+			<li *ngFor="let tab of tabNames" class="list-group-item" [routerLink]="['/account/settings', tab]" routerLinkActive="active">
+				{{tab}}
+			</li>
+		</ul>
+	</div>
+	<div class="col-md-9">
+        <ng-container [ngSwitch]="selectedTab">
+        	<app-profile-photo-pane *ngSwitchCase="'profile-photo'"></app-profile-photo-pane>
+        	<app-personal-details-pane *ngSwitchCase="'personal-details'"></app-personal-details-pane>
+        	<app-change-password-pane *ngSwitchCase="'password'"></app-change-password-pane>
+          <ng-container *ngSwitchDefault>{{selectedTab}}</ng-container>
+        </ng-container> 
+	</div>
+</div>

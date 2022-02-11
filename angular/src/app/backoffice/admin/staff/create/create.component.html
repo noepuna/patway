@@ -1,0 +1,149 @@
+<nav aria-label="breadcrumb">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="#" [routerLink]="['/backoffice/admin/staff/list']">User List</a></li>
+	  <li class="breadcrumb-item active" aria-current="page">Create User</li>
+	</ol>
+</nav>
+<form method="post" (submit)="save()">
+	<div class="card">
+		<div class="card-header">
+			<div class="h2 text-center" [class.text-danger]="formErrors" [class.text-success]="staffId">ADD USER</div>
+		</div>
+		<div class="card-body">
+		
+			<div class="modal-body">
+				<div class="row justify-content-center">
+					<div class="col-md-12">
+						
+						<div class="form-group mb-2">
+							<label class="d-none">Account Id</label>
+							<input
+								type="text" readonly
+								class="form-control-plaintext d-none"
+								[class.is-valid]="staffId"
+							>
+							<div class="valid-feedback">							
+								<div class="alert alert-success" role="alert">
+									Account created! click <a [routerLink]="['/admin/staff/view', staffId]">here</a> to view
+								</div>
+							</div>						  
+						</div> 
+
+						<div class="row">
+							<div class="col-6">
+						 
+								<div class="form-group mb-2">
+									<label>First Name<span class="text-danger">*</span></label>
+									<input
+										type="text"
+										class="form-control"
+										placeholder="Enter your first name"
+										name="firstname"
+										[(ngModel)]="payload.firstname"
+										[class.is-invalid]="formErrors?.account?.firstname"
+									>
+									<div *ngIf="formErrors?.account?.firstname" class="invalid-feedback">{{formErrors.account.firstname}}</div>
+								</div> 
+							</div>
+							<div class="col-6">
+								<div class="form-group mb-2">
+									<label>Last Name<span class="text-danger">*</span></label>
+									<input
+										type="text"
+										class="form-control"
+										placeholder="Enter your first name"
+										name="lastname"
+										[(ngModel)]="payload.lastname"
+										[class.is-invalid]="formErrors?.account?.lastname"
+									>
+									<div *ngIf="formErrors?.account?.lastname" class="invalid-feedback">{{formErrors.account.lastname}}</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group mb-2">
+							<label>Email<span class="text-danger">*</span></label>
+							<input
+								type="text"
+								class="form-control"
+								placeholder="Enter your first name"
+								name="email"
+								[(ngModel)]="payload.email"
+								[class.is-invalid]="formErrors?.account?.email"
+							>
+							<div *ngIf="formErrors?.account?.email" class="invalid-feedback">{{formErrors.account.email}}</div>
+						</div> 
+
+						<div class="row">
+							<div class="col-6">
+								<div class="form-group mb-2">
+									<label>Password<span class="text-danger">*</span></label>
+									<input
+										type="password"
+										class="form-control"
+										placeholder="Enter your first name"
+										name="auth[password]"
+										[(ngModel)]="payload.auth.password"
+										[class.is-invalid]="formErrors?.auth?.password"
+									>
+									<div *ngIf="formErrors?.auth?.password" class="invalid-feedback">{{formErrors.auth.password}}</div>
+								</div>
+							</div>
+							<div class="col-6">
+								<div class="form-group mb-2">
+									<label>Confirm Password<span class="text-danger">*</span></label>
+									<input
+										type="password"
+										class="form-control"
+										placeholder="Enter your first name"
+										name="auth[re_password]"
+										[(ngModel)]="payload.auth.rePassword"
+										[class.is-invalid]="formErrors?.auth?.re_password"
+									>
+									<div *ngIf="formErrors?.auth?.re_password" class="invalid-feedback">{{formErrors.auth.re_password}}</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-6">
+								<div class="form-group mb-2">
+									<label class="" for="role">Department</label>
+									<select class="form-select" name="department">
+										<option *ngFor="let dept of officeDepartments" [value]="dept?.id">{{dept?.name}}</option>
+									</select>
+									<!-- <select class="form-select" name="role" id="role">
+										<option value="1">Finance</option>
+										<option value="2">Engineering</option>
+										<option value="1">Marketing</option>
+										<option value="3">Production</option>
+									</select> -->
+								</div>
+							</div>
+							<div class="col-6">
+								<div class="form-group mb-2">
+									<label class="" for="role">Role</label>
+									<select class="form-select" name="role" id="role">
+										<option value="1">User</option>
+										<option value="1">Supervisor</option>
+										<option value="2">Manager</option>
+										<!-- <option value="3">Gate Keeper</option> -->
+									</select>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+				
+				<hr />
+				<div class="row form-group mb-2">
+					<div class="text-right col d-flex justify-content-end">
+						<button class="btn btn-danger mx-1" type="reset" (click)="resetForm(); false">Reset</button>
+						<button class="btn btn-primary mr-2" type="submit">Submit</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>

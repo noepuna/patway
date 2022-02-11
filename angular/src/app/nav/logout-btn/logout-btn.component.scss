@@ -1,0 +1,18 @@
+.loginBtn {
+	cursor: pointer;
+}
+.loginBtn:hover,
+.loginBtn:focus,
+.loginBtn:active {
+	color: #d69d53;
+  border: none;
+}
+.logoutBtn {
+  margin-left: .5rem;
+}
+.logoutBtn:hover,
+.logoutBtn:focus,
+.logoutBtn:active {
+	color: #d69d53;
+  cursor: pointer;
+}

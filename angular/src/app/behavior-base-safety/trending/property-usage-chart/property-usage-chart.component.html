@@ -1,0 +1,25 @@
+<div class="card text-center">
+	<div class="card-header d-flex justify-content-between">
+		<div class="text-uppercase">{{categoryName}}
+		</div>
+		<div class=" d-flex">
+			<!-- <select class="form-select form-select-sm" aria-label="Default select example">
+				<option selected>Safe/Unsafe</option>
+				<option value="1">Safe</option>
+				<option value="2">Unsafe</option>
+			</select> -->
+			<select class="form-select form-select-sm mx-1" [(ngModel)]="filterByDateType" (change)="this.filterByDateValue = null; filterByDate()">
+				<option selected value="1">Monthly</option>
+				<option value="2">Quarterly</option>
+				<option value="3">Yearly</option>
+			</select>
+			<select class="form-select form-select-sm" name="filter_date_value" [(ngModel)]="filterByDateValue" (change)="filterByDate()">
+				<option *ngFor="let option of moreOptions[filterByDateType]" [value]="option.value">{{option.name}}</option>
+			</select>
+		</div>
+	</div>
+	<div class="card-body">
+		<canvas #chart></canvas>
+	</div>
+	<div class="card-footer text-muted">{{filterDisplayInfo}}</div>
+</div>

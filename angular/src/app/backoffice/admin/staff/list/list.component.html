@@ -1,0 +1,53 @@
+<nav aria-label="breadcrumb">
+	<ol class="breadcrumb">
+	  <li class="breadcrumb-item active" aria-current="page">User List</li>
+	</ol>
+</nav>
+<div class="card">
+	<header class="card-header">
+		<div class="row" md="6">
+			<div class="col"><h5>USER List</h5></div>
+			<div class="col d-flex justify-content-end">
+				<button routerLink="/backoffice/admin/staff/create" class="mr-1 btn-sm btn btn-outline-dark float-right btn-sm" type="button">
+					Create New
+				</button>
+			</div>
+		</div>
+	</header>
+	<div class="card-body">
+		<div>
+			
+		</div>
+		<div class="position-relative table-responsive">
+			<table class="table table-striped table-hover">
+				<thead>
+					<tr>
+						<th class="font-weight-bold"><div class="d-inline">Name</div></th>
+						<th class=""><div class="d-inline">Registered</div></th>
+						<th class=""><div class="d-inline">View</div></th>
+					</tr>
+				</thead>
+				<tbody style="cursor: pointer;">
+					<tr *ngFor="let iObservation of searchResult?.data" class="" tabindex="0" (click)="navigateStaffDetails(iObservation.id)">
+						<td class="font-weight-bold">{{iObservation?.firstname}} {{iObservation?.lastname}}</td>
+						<td class="">{{iObservation?.date_joined * 1000 | date:'MMMM d, y'}}</td>
+						<td><img src="./assets/img/view-file.png" alt="view" width="25"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<nav aria-label="pagination">
+			<ul class="pagination justify-content-center">
+				<li class="page-item disabled">
+					<a href="#" class="disabled page-link" aria-label="Go to previous page" aria-disabled="true">‹</a>
+				</li>
+				<li class="active page-item">
+					<a href="#" class="page-link" aria-label="Current page 1">1</a>
+				</li>
+				<li class="page-item disabled">
+					<a href="#" class="disabled page-link" aria-label="Go to next page" aria-disabled="true">›</a>
+				</li>
+			</ul>
+		</nav>
+	</div>
+</div>

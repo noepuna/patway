@@ -1,0 +1,40 @@
+ <div class="card mb-5">
+	<header class="card-header">Update Profile Picture</header>
+	<div class="card-body">
+		<form method="post" enctype="multipart/form-data" class="mt-2" (submit)="!updateXHR && save(); false">
+			<div class="text-success" *ngIf="profilePhotoId">Update completed!</div>
+			<div class="row">
+				<label class="">Choose Profile Photo</label>
+				<small class="mb-2 text-danger">Note: square image & jpg type only!</small>
+			</div>
+			<div class="row">
+				<div class="col">
+					<div class="col-md-12">
+						<input
+							type="file"
+							class="custom-file-input"
+							name="file-multiple-input"
+							(change)="onFileChange($event)"
+							[class.is-invalid]="formErrors?.account?.profile_photo"
+						/>
+						<div *ngIf="formErrors?.account?.profile_photo?.app_component" class="invalid-feedback">
+							{{formErrors.account.profile_photo?.app_component}}
+						</div>
+						<div *ngIf="formErrors?.account?.profile_photo?.file_upload" class="invalid-feedback">
+							{{formErrors.account.profile_photo?.file_upload}}
+						</div>
+						<label class="custom-file-label" for="file-multiple-input">Choose Files...</label>
+					</div>
+					<button *ngIf="currentPhoto" class="btn btn-sm btn-outline-danger" (click)="restoreAttachmentFile()">reset</button>
+				</div>
+				<div class="col">
+					<div class="text-right col d-flex justify-content-end">
+						<button class="btn btn-primary mr-2 btn-sm" type="submit" [disabled]="updateXHR">Save</button>
+					</div>
+				</div>
+			</div>
+			<hr>
+			<iframe [src]="selectedPhoto" width="100%" height="880px" *ngIf="selectedPhoto"></iframe>
+		</form>
+	</div>
+</div>

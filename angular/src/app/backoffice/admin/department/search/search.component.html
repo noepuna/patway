@@ -1,0 +1,52 @@
+<nav aria-label="breadcrumb">
+	<ol class="breadcrumb"> 
+	  <li class="breadcrumb-item active" aria-current="page">Update</li>
+	</ol>
+</nav>
+<div class="card">
+	<header class="card-header">
+		<div class="row" md="6">
+			<div class="col"><h5>Office Department List</h5></div>
+			<div class="col d-flex justify-content-end">
+				<button routerLink="/backoffice/admin/department/create" class="mr-1 btn-sm btn btn-outline-dark float-right btn-sm" type="button">
+					Create New
+				</button>
+			</div>
+		</div>
+	</header>
+	<div class="card-body">
+		<div class="position-relative table-responsive">
+			<table class="table table-striped table-hover">
+				<thead>
+					<tr>
+						<th class="font-weight-bold"><div class="d-inline">Name</div></th>
+						<th class=""><div class="d-inline">Description</div></th>
+						<th class=""><div class="d-inline">Disabled</div></th>
+						<th class=""><div class="d-inline">Update</div></th> 
+					</tr>
+				</thead>
+				<tbody style="cursor: pointer;">
+					<tr *ngFor="let iDepartment of searchResult?.data" class="" tabindex="0" (click)="navigateStaffDetails(iDepartment.id)">
+						<td class="font-weight-bold">{{iDepartment?.name}}</td>
+						<td class="">{{iDepartment?.description}}</td>
+						<td class="">{{iDepartment?.enabled ? "No" : "Yes"}}</td>
+						<td><img src="./assets/img/view-file.png" alt="view" width="25"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<nav aria-label="pagination">
+			<ul class="pagination justify-content-center">
+				<li class="page-item disabled">
+					<a href="#" class="disabled page-link" aria-label="Go to previous page" aria-disabled="true">‹</a>
+				</li>
+				<li class="active page-item">
+					<a href="#" class="page-link" aria-label="Current page 1">1</a>
+				</li>
+				<li class="page-item disabled">
+					<a href="#" class="disabled page-link" aria-label="Go to next page" aria-disabled="true">›</a>
+				</li>
+			</ul>
+		</nav>
+	</div>
+</div>

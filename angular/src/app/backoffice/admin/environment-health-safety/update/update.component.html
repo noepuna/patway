@@ -1,0 +1,109 @@
+<nav aria-label="breadcrumb">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="#" [routerLink]="['/backoffice/admin/environment-health-safety/list']">Manage EH & E Files</a></li>
+	  <li class="breadcrumb-item active" aria-current="page">Update</li>
+	</ol>
+</nav>
+<div class="card">
+	<header class="card-header">
+		<div class="row">
+			<div class="col-md-8">UPDATE EHS</div>
+			<div class="col-md-4 d-flex justify-content-end">
+				<a appBackNav aria-current="page" class="active" data-toggle="tooltip" data-placement="top" title="Download">
+					<button type="button" class="btn btn-link btn-sm text-muted" appBackNav>← Go Back</button>
+				</a>
+			</div>
+		</div>
+	</header>
+	<div class="card-body">
+		<div class="container">
+			<div class="h2 text-center text-uppercase" [class.text-danger]="formErrors" [class.text-success]="updateFlag">
+				Create Environment Health & Safety
+			</div>
+			<p *ngIf="updateFlag" class="text-success">update complete!</p>
+			<form method="post" enctype="multipart/form-data" class="mt-2" (submit)="update(); false">
+				<div class="form-group mb-2" *ngFor="let setting of settings; let index = index">
+					<input #taskEl
+						type="checkbox"
+						[name]="'setting[' + setting.id + ']'"
+						[checked]="!!setting.isChecked"
+						(change)="settings[index].isChecked = !setting.isChecked" />&#160;
+					<label>{{setting?.name}}</label>
+					<div class="invalid-feedback"></div>
+				</div>
+				<div class="form-group mb-2">
+					<label>Name</label>
+					<input
+						type="text"
+						class="form-control"
+						placeholder="name"
+						name="name"
+						[(ngModel)]="ehs.name"
+						[class.is-invalid]="formErrors?.ehs?.name"
+					>
+					<div *ngIf="formErrors?.ehs?.name" class="invalid-feedback">{{formErrors.ehs.name}}</div>
+				</div>
+				<div class="form-group mb-2">
+					<label class="" for="textarea-description">DESCRIPTION:</label>
+					<textarea
+						class="form-control"
+						name="description"
+						[(ngModel)]="ehs.description"
+						rows="3"
+						placeholder="description"
+						[class.is-invalid]="formErrors?.ehs?.description"
+					>
+					</textarea>
+					<div *ngIf="formErrors?.ehs?.description" class="invalid-feedback">{{formErrors.ehs.description}}</div>
+				</div>
+				<div class="row form-group">
+					<div class="row form-group mb-2">
+						<div class="col">
+							<label class="">Icon:</label>
+							<div class="col-md-12">
+								<input
+									type="file"
+									class="custom-file-input"
+									name="file-multiple-input"
+									(change)="onIconChange($event)"
+									[class.is-invalid]="formErrors?.ehs?.icon_file"
+									disabled
+								/>
+								<div *ngIf="formErrors?.ehs?.icon_file" class="invalid-feedback">{{formErrors.ehs.icon_file}}</div>
+								<label class="custom-file-label">Choose Files...</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row form-group">
+					<div class="row form-group mb-2">
+						<div class="col">
+							<label class="">Attachment:</label>
+							<div class="col-md-12">
+								<input
+									type="file"
+									class="custom-file-input"
+									name="file-multiple-input"
+									(change)="onAttachmentChange($event)"
+									[class.is-invalid]="formErrors?.ehs?.attachment_file"
+									disabled
+								/>
+								<div *ngIf="formErrors?.ehs?.attachment_file" class="invalid-feedback">
+									{{formErrors.ehs.attachment_file}}
+								</div>
+								<label class="custom-file-label">Choose Files...</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<hr />
+				<div class="row form-group">
+					<div class="text-right col d-flex justify-content-end">
+						<button class="btn btn-danger mx-1" type="reset">Reset</button>
+						<button class="btn btn-primary mr-2" type="submit">Submit</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

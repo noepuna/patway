@@ -1,0 +1,125 @@
+<nav aria-label="breadcrumb">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="#" [routerLink]="['/support-ticket/list']">Message List</a></li>
+	  <li class="breadcrumb-item active" aria-current="page">Create User</li>
+	</ol>
+</nav>
+<div class="card">
+	<header class="card-header">
+		<div class="row">
+			<div class="col-md-8"><b>NEW MESSAGE</b></div>
+			<div class="col-md-4 d-flex justify-content-end">
+				<a appBackNav class="" data-toggle="tooltip" data-placement="top" title="Download">
+					<button type="button" class="btn btn-link btn-sm text-muted">← Go Back</button>
+				</a>
+			</div>
+		</div>
+	</header>
+	<div class="card-body">
+		<div class="container">
+			<div class="h2 text-center" [class.text-danger]="formErrors" [class.text-success]="ticketId"><b>Create New Message</b></div>
+			<form action="" method="post" enctype="multipart/form-data" class="mt-2" (submit)="save()">
+				<div class="form-group mb-2">
+					<label class="d-none">Ticket Id</label>
+					<input
+						type="text" readonly
+						class="form-control-plaintext d-none"
+						[class.is-valid]="ticketId"
+					>
+					<div class="valid-feedback">Message Created! click <a [routerLink]="['/support-ticket/view', ticketId]">here</a> to view</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group mb-2">
+							<label><b>TO:</b> <span class="text-danger">*</span></label>
+							<input
+								type="text"
+								class="form-control"
+								placeholder="type email address here..."
+								name="to"
+								[(ngModel)]="payload.dateCreated"
+								[class.is-invalid]="formErrors?.ticket?.to"
+							>
+							<div *ngIf="formErrors?.ticket?.to" class="invalid-feedback">{{formErrors.ticket.to}}</div>
+						</div>
+						<div class="form-group mb-2">
+							<label><b>SUBJECT:</b> <span class="text-danger">*</span></label>
+							<input
+								type="text"
+								class="form-control"
+								placeholder="Subject here"
+								name="subject"
+								[(ngModel)]="payload.subject"
+								[class.is-invalid]="formErrors?.ticket?.subject"
+							>
+							<div *ngIf="formErrors?.ticket?.subject" class="invalid-feedback">{{formErrors.ticket.subject}}</div>
+						</div>
+					</div>
+				</div>
+				<div class="form-group mb-2">
+					<label><b>DESCRIPTION:</b></label>
+					<textarea
+						class="form-control"
+						name="description"
+						[(ngModel)]="payload.description"
+						rows="3"
+						placeholder="Message here..."
+						[class.is-invalid]="formErrors?.ticket?.description">
+					</textarea>
+					<div *ngIf="formErrors?.ticket?.description" class="invalid-feedback">{{formErrors.ticket.description}}</div>
+				</div>
+				<div class="form-group mb-2">
+					<label><b>ADD SEVERITY:</b> <span class="text-danger">*</span></label>
+					<select class="form-control" name="severity" [(ngModel)]="payload.severity" [class.is-invalid]="formErrors?.ticket?.severity">
+						<option value="1">Low</option>
+						<option value="2">Medium</option>
+						<option value="3">High</option>
+						<option value="4" disabled>Critical</option>
+					</select>
+					<div *ngIf="formErrors?.ticket?.severity" class="invalid-feedback">{{formErrors.ticket.severity}}</div>
+				</div>
+				<div class="row form-group mb-2">
+					<div class="col">
+						<label class="" for="text-location"><b>ACCESS:</b></label>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="checkbox" id="-checkbox0" name="-checkbox0" value="option0">
+									<label class="form-control-label" for="-checkbox0">All Department</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="checkbox" id="checkbox1" name="checkbox1" value="option1">
+									<label class="form-control-label" for="checkbox1">Department One</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="checkbox" id="checkbox2" name="checkbox2" value="option2">
+									<label class="form-control-label" for="checkbox2">Department Two</label>
+								</div>
+								<div class="form-check form-check-inline">
+									<input class="form-check-input" type="checkbox" id="checkbox3" name="checkbox3" value="option3">
+									<label class="form-control-label" for="checkbox3">Department Three</label>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row form-group mb-2">
+					<div class="col">
+						<label class=""><b>ADD FILES:</b></label>
+						<div class="col-md-12">
+							<input class="custom-file-input" name="file-multiple-input" multiple="" type="file">
+							<label class="custom-file-label" for="file-multiple-input">Choose Files...</label>
+						</div>
+					</div>
+				</div>
+				<hr />
+				<div class="row form-group mb-2">
+					<div class="text-right col d-flex justify-content-end">
+						<button class="btn btn-danger mx-1" type="reset">Reset</button>
+						<button class="btn btn-primary mr-2" type="submit">Submit</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

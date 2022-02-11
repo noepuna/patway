@@ -1,0 +1,62 @@
+<nav aria-label="breadcrumb justify-content-between">
+	<ol class="breadcrumb"> 
+		<li class="breadcrumb-item"><a href="#" [routerLink]="['/project']">Project</a></li>			
+	  	<li class="breadcrumb-item active" aria-current="page">BBS List</li>
+	</ol>
+</nav>
+<div class="card">
+	<header class="card-header">
+		<div class="d-flex justify-content-between">
+			<div>BBS REPORTS</div>
+			<div class="d-flex justify-content-end">
+                <button routerLink="/behavior-base-safety/status" class="btn-sm btn btn-outline-secondary float-right btn-sm" type="button">
+                    Status
+                </button>
+				<button routerLink="/behavior-base-safety/trending" class="mr-1 btn-sm btn btn-outline-secondary mx-2 float-right btn-sm" type="button">
+					Trending
+				</button>
+				<button routerLink="/behavior-base-safety/list" class="mr-1 btn-sm btn btn-outline-primary float-right btn-sm">
+					BBS List
+				</button>
+				<button routerLink="/behavior-base-safety/create" class="mr-1 btn-sm btn btn-outline-secondary float-right btn-sm mx-2" type="button">
+					Create
+				</button>
+			</div>
+		</div>
+	</header>
+	<div class="card-body">
+		<div class="position-relative table-responsive">
+			<table class="table table-striped table-hover">
+				<thead>
+					<tr>
+						<th>Id</th>
+						<th>Created By</th>
+						<th>Registered</th>
+						<th>View</th>
+					</tr>
+				</thead>
+				<tbody style="cursor: pointer;">
+					<tr *ngFor="let iObservation of searchResult?.data" class="" tabindex="0" (click)="navigateStaffDetails(iObservation.id)">
+						<td>{{iObservation?.id}}</td>
+						<td>{{iObservation?.owner?.name}}</td>
+						<td class="">{{iObservation?.date_created * 1000 | date:'MMMM d, y'}}</td>
+						<td><img src="./assets/img/view-file.png" alt="view" width="25"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<nav aria-label="pagination">
+			<ul class="pagination justify-content-center">
+				<li class="page-item disabled">
+					<a href="#" class="disabled page-link" aria-label="Go to previous page" aria-disabled="true">‹</a>
+				</li>
+				<li class="active page-item">
+					<a href="#" class="page-link" aria-label="Current page 1">1</a>
+				</li>
+				<li class="page-item disabled">
+					<a href="#" class="disabled page-link" aria-label="Go to next page" aria-disabled="true">›</a>
+				</li>
+			</ul>
+		</nav>
+	</div>
+</div>

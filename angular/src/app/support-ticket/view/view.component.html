@@ -1,0 +1,55 @@
+<nav aria-label="breadcrumb">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="#" [routerLink]="['/support-ticket/list']">Message List</a></li>
+	  <li class="breadcrumb-item active" aria-current="page">Message Details</li>
+	</ol>
+</nav>
+<div class="card">
+	<header class="card-header">
+		<div class="row">
+			<div class="col-6">MESSAGE</div>
+			<div class="col-6 d-flex justify-content-end">
+				<a appBackNav class="" data-toggle="tooltip" data-placement="top" title="Download">
+					<button type="button" class="btn btn-link btn-sm text-muted">← Go Back</button>
+				</a>
+				<a aria-current="page" class="active" data-toggle="tooltip" data-placement="top" title="Download" href="#/confirm-space-entry-permit">
+					<button type="button" class="btn btn-link btn-sm text-muted">↓ Download</button>
+				</a>
+			</div>
+		</div>
+	</header>
+	<div class="card-body">
+		<div class="container">
+			<div class="text-center my-4">
+				<h3><b>Safety Memo</b></h3>
+			</div>
+			<div class="mb-5 col">
+				<div class="mb-5">
+					<table class="table table-borderless table-sm ">
+						<tr>
+							<td><b>TO:</b></td>
+							<td>All Workers</td>
+						</tr>
+						<tr>
+							<td><b>FROM:</b></td>
+							<td>Safety Department</td>
+						</tr>
+						<tr>
+							<td><b>DATE:</b></td>
+							<td>{{ticket?.dateCreated * 1000 | date:'MMMM d, y'}}</td>
+						</tr>
+						<tr>
+							<td><b>RE:</b></td>
+							<td>Confined Space Entry Permit</td>
+						</tr>
+						<tr>
+							<td><b>SEVERITY:</b></td>
+							<td class="text-danger">{{ticketSeverity[ticket?.severity]}}</td>
+						</tr>
+					</table>
+				</div>
+				<p>{{ticket?.description}}</p>
+			</div>
+		</div>
+	</div>
+</div>

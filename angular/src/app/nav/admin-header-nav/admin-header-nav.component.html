@@ -1,0 +1,25 @@
+<div class="toolbar" role="banner">
+	<img
+		width="120"
+		alt="Patway Logo"
+		src="assets/img/logo.png"
+	/> 
+	<ng-container *ngIf="loginStatusObs | async; else login">
+		<div class="spacer"></div>
+		<span class="topMenu" routerLink="/backoffice/admin/staff">Users</span>
+		<span class="topMenu" routerLink="/event">Events</span>
+		<span class="topMenu" routerLink="/support-ticket" >Message</span> 
+		<span (click)="logout()" class="logoutBtn">Logout</span>
+	</ng-container>
+	<a aria-label="Profile" target="_blank" rel="noopener" href="" title="Profile">
+		<img
+			alt="profile"
+			src="assets/img/user.png"
+		/>
+	</a>
+</div>
+
+<ng-template #login>
+	<div class="spacer"></div>
+	<span routerLink="/access" class="loginBtnStyle">Login</span>
+</ng-template>

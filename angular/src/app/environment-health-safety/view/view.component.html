@@ -1,0 +1,104 @@
+<div class="row">
+	<div class="col">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="#" [routerLink]="['/project']">Project</a></li>
+				<li class="breadcrumb-item"><a href="#" [routerLink]="['/environment-health-safety']">HS & E</a></li>
+				<li class="breadcrumb-item"><a href="#" [routerLink]="['/environment-health-safety/list']">CMP</a></li>
+			<li class="breadcrumb-item active" aria-current="page">View Details</li>
+			</ol>
+		</nav>
+	</div>
+	<div class="col">	
+		<div class="d-flex justify-content-end">
+			<button 
+				[routerLink]="['/environment-health-safety', 'list']"	
+				class="btn-sm btn btn-outline-secondary float-right btn-sm mx-1" 
+				type="button">
+				All Event
+			</button>
+			<button class="btn-sm btn btn-outline-secondary float-right btn-sm mx-1" type="button">
+				Desktop Event
+			</button>
+			<button
+				type="button"
+				class="btn-sm btn btn-outline-secondary float-right btn-sm mx-1"
+				[routerLink]="['/environment-health-safety', 'list']" [queryParams]="{status:2}"
+				>Active
+			</button>
+			<button
+				type="button"
+				class="btn-sm btn btn-outline-secondary float-right btn-sm mx-1"
+				[routerLink]="['/environment-health-safety', 'list']" [queryParams]="{status:4}"
+				>Archive
+			</button>
+			<!-- <button 
+				[routerLink]="['/environment-health-safety/create', iEHS?.id]" 
+				class="btn-sm btn border-secondary float-right btn-sm mx-1" 
+				routerLinkActive="btn-secondary"
+				[routerLinkActiveOptions]="{exact:true}"
+				type="button">
+				New Event
+			</button> -->
+		</div>
+	</div>
+</div>
+<div class="card mb-5" *ngIf="iMsg">
+	<header class="card-header">
+		<div class="row">
+			<div class="col-6">Crisis Management</div>
+			<div class="col-md-6 d-flex justify-content-end">
+				<a appBackNav aria-current="page" class="active" data-toggle="tooltip" data-placement="top" title="go back">
+					<button type="button" class="btn btn-link btn-sm text-muted">← Go Back</button>
+				</a>
+				<ng-container *ngIf="($_accountSRV.getCachedDetails | async).id === iMsg?.sender?.id">
+					<a class="btn btn-link btn-sm text-muted" [routerLink]="['/environment-health-safety/update', iMsg?.id]">Update</a>
+				</ng-container>
+			</div>
+		</div>
+	</header>
+	<div class="card-body pt-2">
+		<div class="row pt-2">
+			<div class="col">
+				<div class="border p-3 rounded-1">
+					<div class="row mb-4">
+						<div class="col-md-6">
+							<table class="table table-borderless table-sm">
+								<tr><td><b>ID:</b></td><td>{{iMsg?.id}}</td></tr>
+								<tr><td><b>STATUS:</b></td><td>{{iMsg?.status}}</td></tr>
+								<tr><td><b>RISK LEVEL:</b></td><td class="text-danger">{{iMsg?.riskLevel}}</td></tr>
+								<tr><td><b>CREATED BY:</b></td><td>{{iMsg?.sender?.name}}</td></tr>
+								<tr>
+									<td class="pr-5"><b>TO:</b></td>
+									<td><span *ngFor="let recipient of iRecipients">{{recipient?.name}}&#160;</span></td>
+								</tr>								 
+							</table>
+						</div>
+						<div class="col-md-6">
+							<table class="table table-borderless table-sm">		
+								<tr><td><b>LOCATION:</b></td><td>{{iMsg?.location}}</td></tr>						 
+								<tr><td><b>DATE CREATED:</b></td><td>{{iMsg?.dateCreated * 1000 | date:'d MMMM, y'}}</td></tr>
+								<tr><td><b>START TIME:</b></td><td>{{iMsg?.dateCreated * 1000 | date:'HH : mm'}} hour'/s</td></tr>
+								<!-- <tr><td>START TIME:</td><td>{{iMsg?.dateStart * 1000 | date:'d MMMM, y HH:mm:ss'}}</td></tr> -->
+								<tr><td><b>END:</b></td><td>{{ !!iMsg?.dateEnd ? (iMsg?.dateEnd * 1000 | date:'d MMMM, y') : "happening"}}</td></tr>
+								<tr>
+									<td><b>TAG:</b></td>
+									<td>
+									<span *ngFor="let entry of iHashTags">{{entry?.hashtag}}</span>
+								</td></tr>
+							</table>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-8 mx-auto pb-2">
+							<h5 class="text-center"><b>{{iMsg?.title}}</b></h5>
+							<p class="mb-0">{{iMsg?.description}}</p>
+							<p class="mb-0 d-none">...<small class="text-danger"><i>(attach files working in progress)</i></small></p>
+						</div>
+					</div>
+				</div>
+			</div>	
+		<!-- reply section -->
+		<app-comments-section [conversationId]="iMsg?.id" [canReply]="iMsg?.status !== 'closed'"></app-comments-section>
+	</div>
+</div>
