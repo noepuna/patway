@@ -1,0 +1,7 @@
+<div *ngIf="routeData | async as settings">
+	<ng-container [ngSwitch]="settings?.pageType?.name">
+		<app-admin-header-nav *ngSwitchCase="pageTypes.owner.name"></app-admin-header-nav>
+		<app-default-header-nav *ngSwitchDefault></app-default-header-nav>
+		<!--<ng-container *ngSwitchDefault></ng-container>-->
+	</ng-container>
+</div>

@@ -1,0 +1,136 @@
+<div class="card">
+	<header class="card-header">
+		<div class="row">
+			<div class="col-md-8">NEW EVENT</div>
+			<div class="col-md-4 d-flex justify-content-end">
+				<a appBackNav aria-current="page" class="active" data-toggle="tooltip" data-placement="top" title="Download">
+					<button type="button" class="btn btn-link btn-sm text-muted">← Go Back</button>
+				</a>
+			</div>
+		</div>
+	</header>
+	<div class="card-body">
+		<div class="container">
+			<div class="h2 text-center" [class.text-danger]="formErrors" [class.text-success]="eventId">CREATE NEW EVENT</div>
+			<form method="post" enctype="multipart/form-data" class="mt-2" (submit)="save()">
+				<div class="form-group mb-2">
+					<label class="d-none">Event Id</label>
+					<input
+						type="text" readonly
+						class="form-control-plaintext d-none"
+						[class.is-valid]="eventId"
+					>
+					<div class="valid-feedback">Event Created! click <a [routerLink]="['/event/view', eventId]">here</a> to view</div>
+				</div>
+				<div class="form-group mb-2">
+					<label class="d-none">Created By</label>
+					<input
+						type="text" readonly
+						class="form-control-plaintext d-none"
+						[class.is-invalid]="formErrors?.event?.created_by"
+					>
+					<div *ngIf="formErrors?.event?.created_by" class="invalid-feedback">{{formErrors.event.created_by}}</div>
+				</div>
+				<div class="form-group mb-2">
+					<label>TO: <span class="text-danger">*</span></label>
+					<input
+						type="text"
+						class="form-control"
+						placeholder="type email address here..."
+						name="to"
+						[(ngModel)]="payload.dateCreated"
+						[class.is-invalid]="formErrors?.event?.to"
+					>
+					<div *ngIf="formErrors?.event?.to" class="invalid-feedback">{{formErrors.event.to}}</div>
+				</div>
+				<div class="row form-group mb-2">
+					<div class="col">
+						<label class="" for="text-location">RISK LEVEL:</label>
+						<select class="form-control" name="severity">
+							<option value="0">Low</option>
+							<option value="1">Medium</option>
+							<option value="2">High</option>
+							<option value="3">Critical</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group mb-2">
+					<label>SUBJECT: <span class="text-danger">*</span></label>
+					<input
+						type="text"
+						class="form-control"
+						placeholder="Title here"
+						name="title"
+						[(ngModel)]="payload.title"
+						[class.is-invalid]="formErrors?.event?.title"
+					>
+					<div *ngIf="formErrors?.event?.title" class="invalid-feedback">{{formErrors.event.title}}</div>
+				</div>
+				<div class="row form-group mb-2">
+					<div class="col">
+						<label class="" for="textarea-description">DESCRIPTION:</label>
+						<textarea
+							class="form-control"
+							name="description"
+							[(ngModel)]="payload.description"
+							rows="3"
+							placeholder="Message here...">
+						</textarea>
+					</div>
+				</div>
+				<div class="form-group mb-2">
+					<label>LOCATION: <span class="text-danger">*</span></label>
+					<input
+						type="text"
+						class="form-control"
+						placeholder="Canada"
+						name="location"
+						[(ngModel)]="payload.location"
+						[class.is-invalid]="formErrors?.event?.location"
+					>
+					<div *ngIf="formErrors?.event?.location" class="invalid-feedback">{{formErrors.event.location}}</div>
+				</div>
+				<div class="row form-group mb-2">
+					<div class="col">
+						<label class="">EVENT START:</label>
+						<div class="row">
+							<div class="col">
+								<input class="form-control" type="date" id="date-input" name="date-input" placeholder="date">
+							</div>
+							<div class="col">
+								<input class="form-control" type="time" id="text-time" name="text-time" placeholder="enter time">
+							</div>
+						</div>
+					</div>
+					<div class="col">
+						<label class="">EVENTS END: <small>(optional)</small></label>
+						<div class="row">
+							<div class="col">
+								<input class="form-control" type="date" id="date-input" name="date-input" placeholder="date">
+							</div>
+							<div class="col">
+								<input class="form-control" type="time" id="text-time" name="text-time" placeholder="enter time">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row form-group">
+					<div class="col">
+						<label class="">ADD FILES:</label>
+						<div class="col-md-12">
+							<input class="custom-file-input" id="file-multiple-input" name="file-multiple-input" multiple="" type="file">
+							<label class="custom-file-label" for="file-multiple-input">Choose Files...</label>
+						</div>
+					</div>
+				</div>
+				<hr />
+				<div class="row form-group">
+					<div class="text-right col d-flex justify-content-end">
+						<button class="btn btn-danger mx-1" type="reset">Reset</button>
+						<button class="btn btn-primary mr-2" type="submit">Submit</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

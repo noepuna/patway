@@ -1,0 +1,61 @@
+<div class="card">
+	<header class="card-header">
+		<div class="row align-items-center">
+			<div class="col-md-8">EVENTS</div>
+			<div class="col-md-4">
+				<div class="input-group">
+					<input type="text" class="form-control form-control-sm"  id="name" placeholder="Search..." aria-label="Recipient's username" aria-describedby="button-addon2">
+					<button class="btn btn-outline-secondary btn-sm" type="button" id="button-addon2">Search</button>
+			 
+					<button type="button" class="btn btn-outline-dark btn-sm mx-1" routerLink="/event/create">New Event</button>
+				</div>
+			</div>
+		</div>
+	</header>
+	<div class="card-body">
+		<div>
+			
+		</div>
+		<div class="position-relative table-responsive">
+			<table class="table table-striped table-hover">
+				<thead>
+					<tr>
+						<th>Created By:</th>
+						<th>Title</th>
+						<th>Description</th>
+						<th>Date Added</th>
+						<th>Location</th>
+						<th>Status</th>
+						<th>View</th>
+						<th>Lesson Learn</th>
+					</tr>
+				</thead>
+				<tbody style="cursor: pointer;">
+					<tr *ngFor="let iEvent of searchResult?.data" class="" tabindex="0" (click)="navigateEventDetails(iEvent.id)">
+						<td>Grant Gaudet</td>
+						<td>{{iEvent?.title}}</td>
+						<td>{{iEvent?.description}}</td>
+						<td>{{iEvent?.date_created * 1000 | date:'MMMM d, y'}}</td>
+						<td>{{iEvent?.location}}</td>
+						<td><span class="badge badge-light">{{iEvent?.closed}}</span></td>
+						<td><a class="" href="#/events/sample-events"><img src="./img/view.png" alt="view" width="20"></a></td>
+						<td><a class="text-muted" href="#/events/lesson-learn"><img src="./img/learn.png" alt="learn" width="20"></a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<nav aria-label="pagination">
+			<ul class="pagination justify-content-center">
+				<li class="page-item disabled">
+					<a href="#" class="disabled page-link" aria-label="Go to previous page" aria-disabled="true">‹</a>
+				</li>
+				<li class="active page-item">
+					<a href="#" class="page-link" aria-label="Current page 1">1</a>
+				</li>
+				<li class="page-item disabled">
+					<a href="#" class="disabled page-link" aria-label="Go to next page" aria-disabled="true">›</a>
+				</li>
+			</ul>
+		</nav>
+	</div>
+</div>

@@ -1,0 +1,12 @@
+php_value include_path "C:/xampp/htdocs/patway/"
+
+SetEnv BASE_PATH "patway"
+
+#RewriteEngine On
+	##RewriteCond %{REQUEST_URI}% -d [OR]
+	##RewriteCond %{REQUEST_URI}% -f
+	#RewriteBase "/xxx/"
+	#RewriteCond %{REQUEST_FILENAME} !-f
+	#RewriteCond %{REQUEST_FILENAME} !-d
+	#RewriteCond %{REQUEST_FILENAME} !-l
+#RewriteRule ^ dist [L,R=301]

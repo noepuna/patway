@@ -1,0 +1,31 @@
+<nav aria-label="breadcrumb">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="#" [routerLink]="['/backoffice/admin/staff/list']">User List</a></li> 
+		<li class="breadcrumb-item active" aria-current="page">Update User</li>
+	</ol>
+</nav>
+<div class="row">
+	<div class="col">
+		<ul class="list-group">
+			<li *ngFor="let segment of segmentCol" class="list-group-item" [routerLink]="['./']" [queryParams]="{segment: segment}" routerLinkActive="active">
+				{{segment}}
+			</li>
+		</ul>
+	</div>
+	<div class="col-md-9">
+		<div class="card mb-1">
+			<div class="card-header">
+				<b>{{accountId}}</b> : User Id
+			</div>
+		</div>
+        <ng-container [ngSwitch]="selectedSegment">
+            <div *ngSwitchCase="'Assigned Tasks'">
+              <app-staff-update-assigned-tasks [staffId]="accountId"></app-staff-update-assigned-tasks>
+            </div>
+            <div *ngSwitchCase="'profile'">
+            	<app-staff-update-profile [staffId]="accountId"></app-staff-update-profile>
+            </div>
+            <ng-container *ngSwitchDefault>{{selectedSegment}}</ng-container>
+        </ng-container> 
+	</div>
+</div>

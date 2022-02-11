@@ -1,0 +1,60 @@
+<nav aria-label="breadcrumb">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="#" [routerLink]="['/backoffice/admin/department/search']">Department</a></li>
+	  <li class="breadcrumb-item active" aria-current="page">Create</li>
+	</ol>
+</nav>
+<div class="card">
+	<header class="card-header">
+		<div class="row">
+			<div class="col-md-8">NEW DEPARTMENT</div>
+		</div>
+	</header>
+	<div class="card-body">
+		<div class="container">
+			<div class="h2 text-center" [class.text-danger]="formErrors" [class.text-success]="departmentId">OFFICE DEPARTMENT</div>
+			<form method="post" enctype="multipart/form-data" class="mt-2" (submit)="save()">
+				<div class="form-group mb-2">
+					<label class="d-none">Department Id</label>
+					<input
+						type="text" readonly
+						class="form-control-plaintext d-none"
+						[class.is-valid]="departmentId"
+					>
+					<div class="valid-feedback">New Office Department Created!</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12 m-auto">
+						<div class="form-group mb-2">
+							<label>NAME: <span class="text-danger">*</span></label>
+							<input
+								type="text"
+								name="name"
+								class="form-control border"
+								placeholder="Enter name.."
+								[(ngModel)]="payload.name"
+								[class.is-invalid]="formErrors?.office_department?.name"
+							/>
+							<div *ngIf="formErrors?.office_department?.name as nameErr" class="invalid-feedback">{{nameErr}}</div>
+						</div> 
+						<div class="form-group mb-2">
+							<label>DESCRIPTION:</label>
+							<textarea
+								name="description"
+								class="form-control"
+								rows="3"
+								placeholder="Description here..."
+								[(ngModel)]="payload.description"
+								[class.is-invalid]="formErrors?.office_department?.description">
+							</textarea>
+							<div *ngIf="formErrors?.office_department?.description as descriptionErr" class="invalid-feedback">{{descriptionErr}}</div>
+						</div>
+						<div class="form-group mb-2">
+							<button class="btn btn-primary mr-2" type="submit">Submit</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

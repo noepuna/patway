@@ -1,0 +1,107 @@
+<nav aria-label="breadcrumb">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="#" [routerLink]="['/backoffice/admin/environment-health-safety/list']">Manage EH & E Files</a></li>
+	  <li class="breadcrumb-item active" aria-current="page">Create</li>
+	</ol>
+</nav>
+<div class="card">
+	<header class="card-header">
+		<div class="row">
+			<div class="col-md-8">NEW EHS</div>
+			<div class="col-md-4 d-flex justify-content-end">
+				<a appBackNav aria-current="page" class="active" data-toggle="tooltip" data-placement="top" title="Download">
+					<button type="button" class="btn btn-link btn-sm text-muted" appBackNav>← Go Back</button>
+				</a>
+			</div>
+		</div>
+	</header>
+	<div class="card-body">
+		<div class="container">
+			<div class="h2 text-center text-uppercase" [class.text-danger]="formErrors" [class.text-success]="EHSid">
+				Create Environment Health & Safety
+			</div>
+			<form method="post" enctype="multipart/form-data" class="mt-2" (submit)="save(); false">
+				<div class="form-group mb-2">
+					<label class="d-none">EHS Id</label>
+					<input
+						type="text" readonly
+						class="form-control-plaintext d-none"
+						[class.is-valid]="EHSid"
+					>
+					<div class="valid-feedback">
+						EHS Created! click <a [routerLink]="['/backoffice/admin/environment-health-safety/view', EHSid]">here</a> to view
+					</div>
+				</div>
+				<div class="form-group mb-2">
+					<label>Name</label>
+					<input
+						type="text"
+						class="form-control"
+						placeholder="name"
+						name="name"
+						[(ngModel)]="payload.name"
+						[class.is-invalid]="formErrors?.ehs?.name"
+					>
+					<div *ngIf="formErrors?.ehs?.name" class="invalid-feedback">{{formErrors.ehs.name}}</div>
+				</div>
+				<div class="form-group mb-2">
+					<label class="" for="textarea-description">DESCRIPTION:</label>
+					<textarea
+						class="form-control"
+						name="description"
+						[(ngModel)]="payload.description"
+						rows="3"
+						placeholder="description"
+						[class.is-invalid]="formErrors?.ehs?.description"
+					>
+					</textarea>
+					<div *ngIf="formErrors?.ehs?.description" class="invalid-feedback">{{formErrors.ehs.description}}</div>
+				</div>
+				<div class="row form-group">
+					<div class="row form-group mb-2">
+						<div class="col">
+							<label class="">Icon:</label>
+							<div class="col-md-12">
+								<input
+									type="file"
+									class="custom-file-input"
+									name="file-multiple-input"
+									(change)="onIconChange($event)"
+									[class.is-invalid]="formErrors?.ehs?.icon_file"
+								/>
+								<div *ngIf="formErrors?.ehs?.icon_file" class="invalid-feedback">{{formErrors.ehs.icon_file}}</div>
+								<label class="custom-file-label">Choose Files...</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row form-group">
+					<div class="row form-group mb-2">
+						<div class="col">
+							<label class="">Attachment:</label>
+							<div class="col-md-12">
+								<input
+									type="file"
+									class="custom-file-input"
+									name="file-multiple-input"
+									(change)="onAttachmentChange($event)"
+									[class.is-invalid]="formErrors?.ehs?.attachment_file"
+								/>
+								<div *ngIf="formErrors?.ehs?.attachment_file" class="invalid-feedback">
+									{{formErrors.ehs.attachment_file}}
+								</div>
+								<label class="custom-file-label">Choose Files...</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<hr />
+				<div class="row form-group">
+					<div class="text-right col d-flex justify-content-end">
+						<button class="btn btn-primary mr-2" type="submit">Submit</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

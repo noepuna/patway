@@ -1,0 +1,267 @@
+<nav aria-label="breadcrumb">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="#" [routerLink]="['/project']">Project</a></li>
+		<li class="breadcrumb-item"><a href="#" [routerLink]="['/behavior-base-safety/list']">BBS</a></li>
+	  <li class="breadcrumb-item active" aria-current="page">Create</li>
+	</ol>
+</nav>
+<div class="card">
+	<header class="card-header">
+		<div class="d-flex justify-content-between">
+			<div class="">CREATE BBS REPORT</div>
+			<div appBackNav class="d-flex justify-content-end">
+                <button routerLink="/behavior-base-safety/status" class="btn-sm btn btn-outline-secondary float-right btn-sm" type="button">
+                    Status
+                </button>
+				<button routerLink="/behavior-base-safety/trending" class="mr-1 btn-sm btn btn-outline-secondary mx-2 float-right btn-sm" type="button">
+					Trending
+				</button>
+				<button routerLink="/behavior-base-safety/list" class="mr-1 btn-sm btn btn-outline-secondary float-right btn-sm" type="button">
+					BBS List
+				</button>
+				<a class="mr-1 btn-sm btn btn-outline-primary float-right btn-sm mx-2" disabled>
+					Create
+				</a>
+			</div>
+		</div>
+	</header>
+	<div class="card-body">
+		<div class="container">
+			<div class="h2 text-center text-uppercase" [class.text-danger]="formErrors" [class.text-success]="observationId"><b>Behavioral Based Safety</b></div>
+			<div class="row">
+				<div class="col-md-10 m-auto text-center">
+					<p>Your concerns for safety and suggestions on how to improve our safety program are important to Client A. Use this form to submit either safety improvement input and/or a BBS safety observation. Your name is optional, and the name of the person being observed is not to be used. This information will be used to continually improve our safety program and working conditions.</p>
+				</div>
+			</div>
+			<form method="post" enctype="multipart/form-data" class="mt-2" (submit)="save()">
+				<div class="row">
+					<div class="col-md-6">
+						<div class="form-group mb-2">
+							<label class="d-none">Observation Id</label>
+							<input
+								type="text" readonly
+								class="form-control-plaintext d-none"
+								[class.is-valid]="observationId"
+							>
+							<div class="alert alert-success col-md-6 valid-feedback" role="alert">
+								Observation Created! click <a [routerLink]="['/behavior-base-safety/view', observationId]">here</a> to view
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="form-group mb-2">
+					<label class="d-none">Created By</label>
+					<input
+						type="text" readonly
+						class="form-control-plaintext d-none"
+						[class.is-invalid]="formErrors?.bbs_observation?.created_by"
+					>
+					<div *ngIf="formErrors?.bbs_observation?.created_by" class="invalid-feedback">{{formErrors.bbs_observation.created_by}}</div>
+				</div>
+
+				<div class="form-group mb-2">
+					<label><b>TYPES OF OBSERVATION:</b><span class="text-danger">*</span></label>
+					<input
+						type="text" readonly
+						class="form-control-plaintext d-none"
+						[class.is-invalid]="formErrors?.bbs_observation?.type_count"
+					>
+					<div *ngIf="formErrors?.bbs_observation?.type_count as typeErr" class="invalid-feedback">{{typeErr}}</div>
+					<div class="col">
+						<div *ngFor="let type of propTypes;let i=index" class="form-check form-check-inline">
+							<input #ObserverTypeEl
+								type="radio"
+								class="form-check-input"
+								name="types[]"
+								(change)="trackObserverType(type.id, type.value, ObserverTypeEl.checked)"
+								[class.is-invalid]="formErrors?.bbs_observation?.types && formErrors.bbs_observation?.types[i]"
+							>
+							<label class="form-check-label" >{{type?.label}}</label>
+							<div *ngIf="formErrors?.bbs_observation?.types && formErrors.bbs_observation?.types[i]" class="invalid-feedback">
+								{{formErrors.bbs_observation.types[i]}}
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row form-group mb-2">
+					<div class="col-md-6">
+						<div class="form-group mb-2">
+							<label><b>DEPARTMENT</b></label>
+							<select class="form-select" name="department">
+								<option *ngFor="let dept of officeDepartments" [value]="dept?.id">{{dept?.name}}</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="row mb-2"> 
+					<div class="col-md-6">
+						<div class="row">
+							<div class="col-md-12">
+								<label><b>SUPERVISOR</b></label>
+							</div>
+						</div>
+						<div class="observerHolder border rounded-1 text-left">
+							<app-staff-account-input [(ngModel)]="selectedSupervisor" name="supervisor">
+								<input
+									type="text"
+									class="form-control inputRecipients"
+									placeholder="enter name.."
+									[class.is-invalid]="formErrors?.bbs_observation?.supervisor"
+								/>
+								<div *ngIf="formErrors?.bbs_observation?.supervisor as supervisorErr" class="invalid-feedback">{{supervisorErr}}</div>
+							</app-staff-account-input>
+						</div>
+					</div>
+				</div>
+				<div class="row form-group mb-2">
+					<div class="col">
+						<label><b>NOTES:</b></label>
+						<textarea
+							class="form-control"
+							name="notes"
+							[(ngModel)]="payload.notes"
+							rows="3"
+							placeholder="message here..."
+							[class.is-invalid]="formErrors?.bbs_observation?.notes">
+						</textarea>
+						<div *ngIf="formErrors?.bbs_observation?.notes as notesErr" class="invalid-feedback">{{notesErr}}</div>
+					</div>
+				</div>
+				<div class="row form-group mb-2">
+					<div class="col">
+						<label><b>RECOMMENDATION</b>:</label>
+						<textarea
+							class="form-control"
+							name="recommendation"
+							[(ngModel)]="payload.recommendation"
+							rows="3"
+							placeholder="message here..."
+							[class.is-invalid]="formErrors?.bbs_observation?.recommendation">
+						</textarea>
+						<div *ngIf="formErrors?.bbs_observation?.recommendation as recommendationErr" class="invalid-feedback">{{recommendationErr}}</div>
+					</div>
+				</div>
+				<div class="row form-group mb-2">
+					<div class="col">
+						<label><b>ACTION TAKEN:</b></label>
+						<textarea
+							class="form-control"
+							name="action_taken"
+							[(ngModel)]="payload.actionTaken"
+							rows="3"
+							placeholder="message here..."
+							[class.is-invalid]="formErrors?.bbs_observation?.action_taken">
+						</textarea>
+						<div *ngIf="formErrors?.bbs_observation?.action_taken" class="invalid-feedback">{{formErrors.bbs_observation.action_taken}}</div>
+					</div>
+				</div>
+				<div class="row form-group mb-2">
+					<div class="col-md-4 col-lg-3" *ngFor="let category of propCategory">
+						<label class="" for="text-location"><small><b class="text-uppercase">{{category?.label}}</b></small></label>
+						<table class="table table-sm">
+							<tr>
+								<th>Description</th>
+								<th>Safe</th>
+								<th>Unsafe</th>
+							</tr>
+							<ng-container *ngFor="let property of category.properties; let propertyIndex = index">
+								<tr>
+									<td>{{property?.label}}</td>
+									<td>
+										<input
+											type="radio"
+											class="is-invalid"
+											[value]="'safe'"
+											[name]="'properties[' + property.id + ']'"
+											[(ngModel)]="category.properties[propertyIndex].value"
+											required
+										/>
+									</td>
+									<td>
+										<input
+											type="radio"
+											[value]="'unsafe'"
+											[name]="'properties[' + property.id + ']'"
+											[(ngModel)]="category.properties[propertyIndex].value"
+											required
+										/>
+									</td>
+								</tr>
+								<tr *ngIf="formErrors?.bbs_observation?.properties as properties">
+									<div [class.is-invalid]="properties[property.id]"></div>
+									<div class="invalid-feedback">{{properties[property.id]?.id}}</div>
+									<div class="invalid-feedback">{{properties[property.id]?.value}}</div>
+								</tr>
+							</ng-container>
+						</table>
+					</div>
+				</div>
+				<div class="row form-group mb-2">
+					<div class="col">
+						<label class="" ><b>OBSERVER FEEDBACK GIVEN TO OTHER WORKERS:</b></label>
+						<textarea
+							class="form-control"
+							name="feedback_to_coworkers"
+							[(ngModel)]="payload.feedbackToCoworkers"
+							rows="3"
+							placeholder="message here..."
+							[class.is-invalid]="formErrors?.bbs_observation?.feedback_to_coworkers">
+						</textarea>
+						<div *ngIf="formErrors?.bbs_observation?.feedback_to_coworkers" class="invalid-feedback">
+							{{formErrors.bbs_observation.feedback_to_coworkers}}
+						</div>
+					</div>
+				</div>
+				<div class="row form-group mb-2">
+					<div class="col">
+						<div class="d-flex">
+							<label class=""><b>ADD FILES</b> required<span class="text-danger">*</span></label>
+							<p class="d-none"><small>Type: pdf / jpg / ng / video</small></p>
+						</div>
+						<div class="col-md-12">
+							<input #attachmentFile
+								type="file"
+								class="custom-file-input"
+								name="file-multiple-input"
+								(change)="onFileChange($event)"
+								[class.is-invalid]="formErrors?.bbs_observation?.attachment_file_upload || formErrors?.bbs_observation?.attachment_file"
+							/>
+							<div *ngIf="formErrors?.bbs_observation?.attachment_file_upload?.app_component" class="invalid-feedback">
+								{{formErrors.bbs_observation.attachment_file_upload?.app_component}}
+							</div>
+							<div *ngIf="formErrors?.bbs_observation?.attachment_file_upload?.file_upload" class="invalid-feedback">
+								{{formErrors.bbs_observation.attachment_file_upload?.file_upload}}
+							</div>
+							<div *ngIf="formErrors?.bbs_observation?.attachment_file && !formErrors?.bbs_observation?.attachment_file_upload" class="invalid-feedback">
+								{{formErrors.bbs_observation.attachment_file}}
+							</div>
+							<label class="custom-file-label" for="file-multiple-input">Choose Files...</label>
+						</div>
+					</div>
+				</div>
+				<hr /> 
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group mb-2">
+							<label class="d-none">Observation Id</label>
+							<input
+								type="text" readonly
+								class="form-control-plaintext d-none"
+								[class.is-valid]="observationId"
+							>
+							<div class="alert alert-success col-md-6 valid-feedback" role="alert">
+								Observation Created! click <a [routerLink]="['/behavior-base-safety/view', observationId]">here</a> to view
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row form-group">
+					<div class="text-right col d-flex justify-content-end">
+						<button class="btn btn-danger mx-1" type="reset">Reset</button>
+						<button class="btn btn-primary mr-2" type="submit">Submit</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

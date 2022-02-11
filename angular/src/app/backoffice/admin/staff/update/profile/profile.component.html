@@ -1,0 +1,25 @@
+<div class="card">
+	<div class="card-body">
+		<div class="container">
+			<div class="h2 text-center" [class.text-danger]="formErrors" [class.text-success]="updateFlag">Staff Details</div>
+			<p *ngIf="updateFlag" class="text-success">update complete!</p>
+			<form method="post" (submit)="save(); false">
+				<div class="row">
+					<div class="form-group mb-2">
+						<label><b>DEPARTMENT</b></label>
+						<select class="form-select" name="department_entry[department]" [(ngModel)]="payload.selectedDepartment">
+							<option *ngFor="let dept of deptEntries" [value]="dept?.id" [selected]="dept?.selected">{{dept?.name}}</option>
+						</select>
+					</div>
+				</div>
+				<hr />
+				<div class="row form-group">
+					<div class="text-right col d-flex justify-content-end">
+						<button class="btn btn-danger mx-1" type="reset">Reset</button>
+						<button class="btn btn-primary mr-2" type="submit">Submit</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

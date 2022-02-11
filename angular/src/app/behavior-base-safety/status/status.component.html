@@ -1,0 +1,53 @@
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#" [routerLink]="['/project']">Project</a></li>
+        <li class="breadcrumb-item"><a href="#" [routerLink]="['/behavior-base-safety/list']">BBS</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Status</li>
+    </ol>
+</nav>
+
+<div class="card mb-5">
+	<header class="card-header">
+		<div class="d-flex justify-content-between">
+			<div>STATUS</div>
+			<div class="d-flex justify-content-end">
+                <button routerLink="/behavior-base-safety/status" class="btn-sm btn btn-outline-secondary float-right btn-sm" type="button">
+                    Status
+                </button>
+				<button routerLink="/behavior-base-safety/trending" class="mr-1 btn-sm btn btn-outline-secondary mx-2 float-right btn-sm" type="button">
+					Trending
+				</button>
+				<button routerLink="/behavior-base-safety/list" class="mr-1 btn-sm btn btn-outline-secondary float-right btn-sm" type="button">
+					BBS List
+				</button>
+				<button routerLink="/behavior-base-safety/create" class="mr-1 btn-sm btn btn-outline-secondary float-right btn-sm mx-2">
+					Create
+				</button>
+			</div>
+		</div>
+	</header>
+	<div class="card-body">                
+        <div class="text-center py-4">
+            <p class="heading-2">Status</p>
+            <hr class="pageUnderline mx-auto mb-5">            
+            <div class="row">
+                <div class="col-md-12 mb-4">
+                    <div class="mb-2 d-flex justify-content-between">
+                        <div class="d-flex"> 
+                            <select class="form-select form-select-sm mx-1" [(ngModel)]="selectedRange" (change)="ngAfterViewInit()">
+                                <option value="1">Monthly</option>
+                                <option value="2">Quarterly</option>
+                                <option value="3">Yearly</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="card text-center">
+                        <div class="card-body">
+                            <canvas #chart></canvas>
+                        </div>
+                      </div>
+                </div> 
+            </div>
+        </div>
+	</div>
+</div>

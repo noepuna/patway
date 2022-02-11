@@ -1,0 +1,81 @@
+<nav aria-label="breadcrumb">
+	<ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#" [routerLink]="['/project']">Project</a></li>
+        <li class="breadcrumb-item"><a href="#" [routerLink]="['/behavior-base-safety/list']">BBS</a></li>
+	  <li class="breadcrumb-item active" aria-current="page">BBS Details</li>
+	</ol>
+</nav>
+<div class="card" *ngIf="iObservation">
+	<header class="card-header">
+		<div class="d-flex justify-content-between">
+			<div>BBS DETAILS</div>
+			<div class="d-flex justify-content-end">
+				<a appBackNav aria-current="page" class="active" data-toggle="tooltip" data-placement="top" title="Download">
+					<button type="button" class="btn btn-link btn-sm text-muted">← Go Back</button>
+				</a>
+				<ng-container *ngIf="($_accountSRV.getCachedDetails | async).id === iObservation?.createdBy">
+					<a class="btn btn-link btn-sm text-muted" [routerLink]="['/behavior-base-safety/update', iObservation?.id]">Update</a>
+				</ng-container>
+			</div>
+		</div>
+	</header>
+	<div class="card-body">
+		<div class="pb-5 container">
+			<div class="row">
+				<div class="col">
+					<div class="h2 text-center mb-4 text-uppercase"><b>Behavioral Based Safety</b></div>
+				</div>
+			</div>
+			<div class="row mb-3"> 
+				<div class="col-md-3">
+					<p class="mb-0"><b>REPORT ID:</b> {{iObservation?.id}}</p>
+					<p class="mb-0"><b>DATE:</b> {{iObservation?.dateCreated * 1000 | date:'d MMMM, y HH : mm'}}</p>  
+					<p class="mb-0"><b>TIME:</b> {{iObservation?.dateCreated * 1000 | date:'HH : mm'}} hour'/s</p>
+					<p class="mb-0"><b>DEPARTMENT:</b> <i class="text-danger">show dept here!</i></p> 
+				</div>
+			</div>
+			<div class="row mb-2">
+				<div class="col-lg-3 col-md-4 col-sm-6 mb-2">
+					<h6><b>OBSERVATION:</b></h6>
+					<p *ngFor="let type of propTypes" class="mb-0">
+						<span *ngIf="1 == type?.value">{{type?.label}}</span>
+					</p>
+				</div>
+				<div class="col-lg-3 col-md-4 col-sm-6 mb-2 col50Mobile">
+					<h6><b>SUPERVISOR:</b></h6>
+					<p class="mb-0">{{iObservation?.supervisor?.name}}</p>
+					<p class="mb-0">{{iObservation?.supervisor?.email}}</p>
+				</div>
+				<div class="col-lg-3 col-md-4 col-sm-6 mb-2 col50Mobile">
+					<h6><b>OBSERVER:</b></h6>
+					<p class="mb-0">{{iObservation?.observer?.name}}</p>
+					<p class="mb-0">{{iObservation?.observer?.email}}</p>
+				</div>
+			</div>
+			<h6><b>NOTES:</b></h6>
+			<p>{{iObservation?.notes}}</p>
+			<h6><b>RECOMMENDATION:</b></h6>
+			<p>{{iObservation?.recommendation}}</p>
+			<h6><b>ACTION TAKEN:</b></h6>
+			<p>{{iObservation?.actionTaken}}</p>
+			<div class="row form-group">
+				<div class="col-md-4 col-lg-3" *ngFor="let category of propCategory">
+					<label class="" for="text-location"><small><b class="text-uppercase">{{category?.label}}</b></small></label>
+					<table class="table table-sm table-borderless">
+						<tr>
+							<th>Description</th>
+							<th>Safe/Unsafe</th>
+						</tr>
+						<tr *ngFor="let property of category?.properties">
+							<td>{{property?.label}}</td>
+							<td [ngClass]="property?.value === 'safe' ? 'text-success' : 'text-danger'">{{property?.value}}</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<h6><b>OBSERVER FEEDBACK GIVEN TO OTHER WORKERS:</b></h6>
+			<p>{{iObservation?.feedbackToCoworkers}}</p>
+			<iframe *ngIf="iObservation?.attachmentFile" [src]="iObservation?.attachmentFile" width="100%" height="500px"></iframe>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,10 @@
+/*
+!.gitignore
+!/angular
+!/backend
+!/database
+!/api
+!/.htaccess
+!/composer.json
+
+/api/files/* 

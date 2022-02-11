@@ -1,0 +1,52 @@
+.spacer {
+  flex: 1;
+}
+
+.toolbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  display: flex;
+  padding: 0 1.5rem;
+  align-items: center;
+  background-color: #1976d2;
+  color: white;
+  font-weight: 600;
+}
+
+.toolbar img {
+  margin: 0;
+} 
+
+/** update */
+.topMenu {
+  padding: .5rem;
+  font-weight: 300;
+}
+.topMenu:hover {
+	color: #d69d53;
+  cursor: pointer;
+}
+.hoverDisable {
+  color: #282828 ;
+}
+.topMenu.hoverDisable {
+  cursor: no-drop;
+} 
+#username {
+  font: size 1.2rem; 
+	color: #f89514;  
+} 
+#username::first-letter {
+  text-transform: uppercase;
+}
+.dropdown-toggle::after {
+  vertical-align: 0;
+}
+.profilePic {
+  font-size: 2rem;
+  width: 32px;
+  border-radius: 50%;
+}

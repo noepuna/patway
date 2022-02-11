@@ -1,0 +1,69 @@
+<div class="my-5">
+    <div class="d-flex mb-4">
+        <h4 class="mb-0 yellow-orange-color" id="icons">HEALTH SAFETY & ENVIRONMENT</h4>
+        <!-- <form class="subnav-search d-flex flex-nowrap ms-auto">
+            <input autocomplete="off" class="form-control search mb-0" id="search" placeholder="Construction" disabled>
+        </form> -->
+		<div class="subnav-search d-flex flex-nowrap ms-auto">
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="#" [routerLink]="['/project']">Project</a></li>
+					<li class="breadcrumb-item active" aria-current="page">Heath Safety & Environment</li>
+				</ol>
+			</nav>
+		</div>
+    </div> 
+    <ul class="row row-cols-3 row-cols-sm-4 row-cols-lg-6 row-cols-xl-8 list-unstyled list" *ngIf="searchResult?.data as EHS">
+        <li class="col mb-4" data-categories="" data-tags="" *ngFor="let criteria of EHS">
+            <a class="d-block text-dark text-decoration-none" [routerLink]="['/environment-health-safety', criteria?.id]">
+            <div class="p-3 py-4 mb-2 bg-light text-center rounded">
+                <img class="icon-blocks"  [src]="criteria?.icon?.url" />                
+            </div>
+            <div class="name text-decoration-none text-center pt-1 yellow-orange-color">
+                {{criteria?.name}}
+            </div></a>
+        </li> 
+    </ul>
+    
+    <div class="d-flex mb-4">
+        <h5 class="mb-0 yellow-orange-color" id="icons">RELATED LINKS</h5>
+    </div>
+    <ul class="row row-cols-3 row-cols-sm-4 row-cols-lg-6 row-cols-xl-8 list-unstyled list">
+        <li class="col mb-4" data-categories="" data-tags="">
+            <a target="_blank" href="https://www.ontario.ca/laws/statute/90o01" class="d-block text-dark text-decoration-none">
+            <div class="p-3 py-4 mb-2 bg-light text-center rounded">
+                <i class="fab fa-canadian-maple-leaf custom-fa-icons text-danger"></i>
+            </div>
+            <div class="name text-decoration-none text-center pt-1 yellow-orange-color">
+                Occupational Health and Safety
+            </div></a>
+        </li>
+        <li class="col mb-4" data-categories="" data-tags="">
+            <a target="_blank" href="https://www.ontario.ca/laws/statute/90e19" class="d-block text-dark text-decoration-none">
+            <div class="p-3 py-4 mb-2 bg-light text-center rounded">
+                <i class="fab fa-canadian-maple-leaf custom-fa-icons text-danger"></i>
+            </div>
+            <div class="name text-decoration-none text-center pt-1 yellow-orange-color">
+                Environmental Protection Act
+            </div></a>
+        </li>
+        <li class="col mb-4" data-categories="" data-tags="">
+            <a target="_blank" href="https://www.ccohs.ca/oshanswers/legisl/intro.html" class="d-block text-dark text-decoration-none">
+            <div class="p-3 py-4 mb-2 bg-light text-center rounded">
+                <i class="fab fa-canadian-maple-leaf custom-fa-icons text-danger"></i>
+            </div>
+            <div class="name text-decoration-none text-center pt-1 yellow-orange-color">
+                OH&S Legislation in Canada
+            </div></a>
+        </li>
+        <li class="col mb-4" data-categories="" data-tags="">
+            <a target="_blank" href="https://laws-lois.justice.gc.ca/eng/acts/F-15/" class="d-block text-dark text-decoration-none">
+            <div class="p-3 py-4 mb-2 bg-light text-center rounded">
+                <i class="fab fa-canadian-maple-leaf custom-fa-icons text-danger"></i>
+            </div>
+            <div class="name text-decoration-none text-center pt-1 yellow-orange-color">
+                Dept of Fisheries and Oceans Act
+            </div></a>
+        </li> 
+    </ul>
+</div>

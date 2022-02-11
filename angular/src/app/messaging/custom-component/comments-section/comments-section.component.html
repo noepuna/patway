@@ -1,0 +1,41 @@
+<div class="form-group mb-2">
+	<label class="d-none">Conversation Id</label>
+	<input
+		type="text" readonly
+		class="form-control-plaintext d-none"
+		[class.is-invalid]="sendReplyErr?.message?.conversation"
+	/>
+	<div *ngIf="sendReplyErr?.message?.conversation as conversationErr" class="invalid-feedback">{{conversationErr}}</div>
+</div>
+
+<div class="card mb-3" *ngFor="let comment of kComments">
+	<div class="row g-0">
+		<div class="col-md-2 col-lg-1 profilePic">
+			<img src="./assets/img/user.png" alt="...">
+		</div>
+		<div class="col-md-10 col-lg-11">
+			<div class="card-body">
+				<h6 class="card-title mb-1"><b>{{comment?.sender?.name}}</b></h6>
+				<p class="card-text mb-0">{{comment?.message}}</p>
+				<p class="card-text"><small class="text-muted">{{comment?.date_created * 1000 | date:'MMMM d, y HH:mm:ss'}}</small></p>
+			</div>
+		</div>
+	</div>
+</div>
+<button class="btn btn-sm btn-link text-decoration-none p-0 mb-2" *ngIf="prevRepliesPayload?.pagetoken" (click)="!fetchPrevRepliesXHR && _fetchPrevReplies()" [disabled]="fetchPrevRepliesXHR">
+	view more comments
+</button>
+<!-- reply form at the bottom -->
+<div *ngIf="canReply" class="form-group mb-2">
+	<label class="d-none">Message</label>
+	<input
+		type="text"
+		class="form-control border"
+		placeholder="write a comment"
+		[(ngModel)]="reply.message"
+		(keyup.enter)="sendReply($event)"
+		[class.is-invalid]="sendReplyErr?.message?.message"
+	/>
+	<div *ngIf="sendReplyErr?.message?.message as msgErr" class="invalid-feedback">{{msgErr}}</div>
+	<small class="d-flex justify-content-end"><i class="text-muted">...press enter to send</i></small>
+</div>

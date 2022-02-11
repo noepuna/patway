@@ -1,0 +1,97 @@
+<div appBackBtn class="card">
+	<header class="card-header">
+		<div class="row">
+			<div class="col-6">SAMPLE EVENTS</div>
+			<div class="col-md-6 d-flex justify-content-end">
+				<a appBackNav aria-current="page" class="active" data-toggle="tooltip" data-placement="top" title="Download">
+					<button type="button" class="btn btn-link btn-sm text-muted">← Go Back</button>
+				</a>
+				<a class="active" data-toggle="tooltip" data-placement="top" title="Download" href="#/events/sample-events">
+					<button type="button" class="btn btn-link btn-sm text-muted">↓ Download</button>
+				</a>
+			</div>
+		</div>
+	</header>
+	<div class="card-body">
+		<div class="container">
+			<div class="text-center my-4">
+				<h3>Sample Event</h3>
+			</div>
+			<div class="mb-5 col">
+				<div class="mb-5">
+					<table class="table table-borderless table-sm ">
+						<tr>
+							<td>TO:</td>
+							<td>Emergency Response Team</td>
+						</tr>
+						<tr>
+							<td>CREATED BY:</td>
+							<td>{{event?.createdBy?.name}}</td>
+						</tr>
+						<tr>
+							<td>DATE:</td>
+							<td>{{event?.dateCreated * 1000 | date:'MMMM d, y'}}</td>
+						</tr>
+						<tr>
+							<td>LOCATION:</td>
+							<td>{{event?.location}}</td>
+						</tr>
+						<tr>
+							<td>RE:</td>
+							<td><b>Emergency Response Team Training</b></td>
+						</tr>
+						<tr>
+							<td>SEVERITY:</td>
+							<td class="text-danger">Low</td>
+						</tr>
+						<tr>
+							<td>Status:</td>
+							<td>{{event?.closed ? "closed" : "open"}}</td>
+						</tr>
+					</table>
+				</div>
+				<div>{{event?.description}}</div>
+				
+
+				<!-- test -->
+				<div class="alert alert-danger" role="alert">
+					Timeline feeds not to be follow!
+				</div>
+				<div class="mb-1 row">
+					<div class="col-2 col-sm-1">
+						<div class=" img-fluid">
+							<img class="c-avatar-img" src="avatars/grant.png" alt="admin@bootstrapmaster.com"></div>
+						</div>
+						<div class="pl-0 col-10 col-md-11">
+							<div class="bg-light text-muted px-2 py-1 rounded">
+								<div class="d-flex justify-content-between">
+									<p class="mb-0 font-weight-bold">Grant Gaudet</p>
+									<small>02 Dec 20 7:25 PM</small>
+								</div>
+								<p>During the installation of rubber lining in the waste recovery tank (Tk-201), solvent recovery area, a fire started and quickly got out of control. Emergency Response Team has been activated. There is no injuries to report at this time.</p>
+							</div>
+						</div>
+					</div>
+					<div class="mb-1 row">
+						<div class="col-2 col-sm-1">
+							<div class=" img-fluid">
+								<img class="c-avatar-img" src="avatars/rinaldo.png" alt="admin@bootstrapmaster.com">
+							</div>
+						</div>
+						<div class="pl-0 col-10 col-md-11">
+							<div class="bg-light text-muted px-2 py-1 rounded">
+								<div class="d-flex justify-content-between">
+									<p class="mb-0 font-weight-bold">Rinaldo Stefan</p>
+									<small>02 Dec 20 7:30 PM</small>
+								</div>
+								<p>The Crisis Management Team has been activated and is awaiting and update from the field on the scene commander.</p>
+							</div>
+						</div>
+					</div>
+					<div class="mb-1 row">
+						<div class="col-2 col-sm-1">
+							<div class=" img-fluid">
+								<img class="c-avatar-img" src="avatars/rinaldo.png" alt="admin@bootstrapmaster.com">
+							</div>
+						</div><div class="pl-0 col-10 col-md-11"><div class="bg-light text-muted px-2 py-1 rounded"><div class="d-flex justify-content-between"><p class="mb-0 font-weight-bold">Rinaldo Stefan</p><small>02 Dec 20 7:33 PM</small></div><p class="mb-1">Initial report from the Emergency Response field scene commander is that no injuries to report at this time. The fire continues to burn creating a lot of black smoke that is making its way towards neighboring houses. The following actions have been taken.</p><ul><li>Out reach to the neighboring houses in order to inform them of the incident</li><li>The Solvent Recovery area has been evacuated</li><li>All roadways leading into the Solvent Recovery area has been closed to non ER personnel</li><li>Medical staff are on the ready to respond</li></ul></div></div></div><div class="mb-1 row"><div class="col-2 col-sm-1"><div class=" img-fluid"><img class="c-avatar-img" src="avatars/grant.png" alt="admin@bootstrapmaster.com"></div></div><div class="pl-0 col-10 col-md-11"><div class="bg-light text-muted px-2 py-1 rounded"><div class="d-flex justify-content-between"><p class="mb-0 font-weight-bold">Rinaldo Stefan</p><small>02 Dec 20 7:48 PM</small></div><p>MSDS has been reviewed of the rubber materials, it has been identified that there is no exposure issues are from the burning materials.</p><p>Regulatory agencies have been notified of the incident and will be updated at 9:00 am.</p><p>Media notification is being developed as we receive further field updates.</p></div></div></div><div class="mb-1 justify-content-end row"><div class="pl-0 col-10 col-md-11"><div class="form-group"><label class="mb-0" for="appendedInputButton">Reply...</label><div class="controls"><div class="input-group"><input class="form-control form-control-16" type="text" id="appendedInputButton" placeholder="Type here..."><div class="input-group-append"><button class="btn btn-secondary" type="button">Send!</button></div></div></div><label class="mb-0" for="appendedInputButton"><a aria-current="page" class="active" href="#/events/sample-events"><i class="fas fa-file iconLink text-muted"></i><i class="fas fa-image iconLink ml-1 text-muted"></i><i class="fas fa-camera iconLink ml-1 text-muted"></i></a></label></div></div></div></div></div></div>
+</div>

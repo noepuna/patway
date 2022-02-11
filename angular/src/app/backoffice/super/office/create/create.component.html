@@ -1,0 +1,127 @@
+<nav aria-label="breadcrumb">
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="#" [routerLink]="['/backoffice/admin/staff/list']">Client List</a></li>
+	  <li class="breadcrumb-item active" aria-current="page">Create Client</li>
+	</ol>
+</nav>
+<form method="post" class="row" (submit)="save()">
+	<div class="modal-content">
+		<header class="modal-header">
+			<h5 class="h2 text-center text-primary" [class.text-danger]="formErrors" [class.text-success]="accountId">ADD CLIENT</h5>
+		</header>
+		<div class="modal-body">
+			<div class="form-group mb-2">
+				<label class="d-none">Account Id</label>
+				<input
+					type="text" readonly
+					class="form-control-plaintext d-none"
+					[class.is-valid]="accountId"
+				>
+				<div class="valid-feedback">Account Created!</div>
+			</div>
+			<div class="row">
+				<div class="col-12 col-md-6">
+					<div class="form-group mb-2">
+						<label class="" for="firstName">First Name</label>
+						<input
+							type="text"
+							class="form-control"
+							name="firstname"
+							placeholder="Enter your first name"
+							[class.is-invalid]="formErrors?.account?.firstname"
+							[(ngModel)]="payload.firstname"
+						/>
+						<div *ngIf="formErrors?.account?.firstname" class="invalid-feedback">{{formErrors.account.firstname}}</div>
+					</div>
+				</div>
+				<div class="col-12 col-md-6">
+					<div class="form-group mb-2">
+						<label class="" for="lastName">Last Name</label>
+						<input
+							type="text"
+							class="form-control"
+							name="lastname"
+							placeholder="Enter your last name"
+							[class.is-invalid]="formErrors?.account?.lastname"
+							[(ngModel)]="payload.lastname"
+						/>
+						<div *ngIf="formErrors?.account?.lastname" class="invalid-feedback">{{formErrors.account.lastname}}</div>
+					</div>
+				</div>
+				<div class="col-12 col-md-6">
+					<div class="form-group mb-2">
+						<label class="" for="email">Email</label>
+						<input
+							type="text"
+							class="form-control"
+							name="emal"
+							placeholder="myaccount@example.com"
+							[class.is-invalid]="formErrors?.account?.email || formErrors?.auth?.username"
+							[(ngModel)]="payload.email"
+						/>
+						<div *ngIf="formErrors?.auth?.username" class="invalid-feedback">email taken</div>
+						<div *ngIf="formErrors?.account?.email" class="invalid-feedback">{{formErrors.account.email}}</div>
+					</div>
+				</div>
+				<div class="col-12 col-md-6">
+					<div class="form-group mb-2">
+						<label class="" for="contactNumber">Contact Number</label>
+						<input
+							type="text"
+							class="form-control"
+							name="contact_number"
+							placeholder="+(000) 000-0000"
+							[class.is-invalid]="formErrors?.account?.tel_num"
+							[(ngModel)]="payload.contactNum"
+						/>
+						<div *ngIf="formErrors?.account?.tel_num" class="invalid-feedback">{{formErrors.account.tel_num}}</div>
+					</div>
+				</div>
+				<div class="col-12 col-md-6">
+					<div class="form-group mb-2">
+						<label class="" for="email">Password</label>
+						<input
+							type="password"
+							class="form-control"
+							name="password"
+							placeholder="********"
+							[class.is-invalid]="formErrors?.auth?.password"
+							[(ngModel)]="payload.password"
+						/>
+						<div *ngIf="formErrors?.auth?.password" class="invalid-feedback">{{formErrors.auth.password}}</div>
+					</div>
+				</div>
+				<div class="col-12 col-md-6">
+					<div class="form-group mb-2">
+						<label class="" for="confirmPassword">Confirm Password</label>
+						<input
+							type="password"
+							class="form-control"
+							name="re_password"
+							placeholder="********"
+							[class.is-invalid]="formErrors?.auth?.re_password"
+							[(ngModel)]="payload.rePassword"
+						/>
+						<div *ngIf="formErrors?.auth?.re_password" class="invalid-feedback">{{formErrors.auth.re_password}}</div>
+					</div>
+				</div>
+				<div class="col-12">
+					<div class="form-group mb-2">
+						<label class="" for="officeAddress">Office Address</label>
+						<textarea
+							class="form-control"
+							rows="3"
+							name="address"
+							placeholder=""
+							[class.is-invalid]="formErrors?.account?.location_address"
+							[(ngModel)]="payload.address"></textarea>
+						<div *ngIf="formErrors?.account?.location_address" class="invalid-feedback">{{formErrors.account.location_address}}</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer">			
+			<button class="btn btn-primary" type="submit">Submit</button>
+		</div>
+	</div>
+</form>

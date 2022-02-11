@@ -1,0 +1,13 @@
+<div class="row">
+	{{accountId}}
+	<div class="col">
+		<ul class="list-group">
+			<li *ngFor="let segment of segmentCol" class="list-group-item" [routerLink]="['./']" [queryParams]="{segment: segment}" routerLinkActive="active">
+				{{segment}}
+			</li>
+		</ul>
+	</div>
+	<div class="col-md-9">
+		{{selectedSegment}}
+	</div>
+</div>

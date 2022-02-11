@@ -1,0 +1,12 @@
+.inputRecipients {
+    text-align: start;  
+}
+@media screen and (max-width: 780px) { 
+    .observer>* {
+        width: 50%;
+    }
+}
+.observerHolder {
+    width: 100%;
+    display: block;
+}

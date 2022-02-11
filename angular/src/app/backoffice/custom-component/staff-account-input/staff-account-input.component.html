@@ -1,0 +1,27 @@
+<div class="btn-group">
+	<!--<input
+		#searchBox
+		type="text"
+		class="btn btn-secondary dropdown-toggle"
+		placeholder="..."
+		[value]="selectedStaff"
+		(keydown)=search()
+	/>-->
+	<div>
+		<ul #menu class="dropdown-menu dropdown-menu-end show" [class.show]="!menuHidden">
+			<li class="border-0" *ngFor="let staff of searchResult" (click)="selectStaff(staff)">
+				<span class="dropdown-item">{{staff?.firstname}} {{staff?.lastname}}</span>
+			</li>
+		</ul>
+		<ul class="list-group list-group-horizontal" *ngIf="isMultiple">
+			<li class="list-group-item d-flex align-items-center justify-content-between border-0 px-2" *ngFor="let staff of selectedStaff">
+				<span class="recipients">{{staff?.firstname}} {{staff?.lastname}}</span>
+				<button type="button" aria-label="Close" (click)="removeStaff(staff?.id)" class="btn-close removeRecipients"></button> ,
+			</li>
+		</ul>
+	</div>
+	<div #content>
+		<ng-content></ng-content>
+		<!--<ng-content select="*"></ng-content>-->
+	</div>
+</div>

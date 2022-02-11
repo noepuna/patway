@@ -1,0 +1,205 @@
+<div class="row">
+	<div class="col">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="#" [routerLink]="['/project']">Project</a></li>
+				<li class="breadcrumb-item"><a href="#" [routerLink]="['/environment-health-safety/list']">HS & E</a></li>
+			  <li class="breadcrumb-item active" aria-current="page">Create Event</li>
+			</ol>
+		</nav>
+	</div>
+	<div class="col">
+		<div class="d-flex justify-content-end">
+			<button 
+				[routerLink]="['/environment-health-safety', 'list']"	
+				class="btn-sm btn btn-outline-secondary float-right btn-sm mx-1" 
+				type="button">
+				All Event
+			</button>
+			<button class="btn-sm btn btn-outline-secondary float-right btn-sm mx-1" type="button">
+				Desktop Event
+			</button>
+			<button
+				type="button"
+				class="btn-sm btn btn-outline-secondary float-right btn-sm mx-1"
+				[routerLink]="['/environment-health-safety', 'list']" [queryParams]="{status:2}"
+				>Active
+			</button>
+			<button
+				type="button"
+				class="btn-sm btn btn-outline-secondary float-right btn-sm mx-1"
+				[routerLink]="['/environment-health-safety', 'list']" [queryParams]="{status:4}"
+				>Archive
+			</button>
+			<button  
+				class="btn-sm btn btn-secondary border-secondary float-right btn-sm mx-1"  
+				type="button">
+				New Event
+			</button>
+		</div>		
+	</div>
+</div>
+
+<div class="card mb-5" *ngIf="EHSDetailsXHR | async">
+	<header class="card-header">
+		<div class="row">
+			<div class="col-md-8">NEW EVENT</div>
+			<div class="col-md-4 d-flex justify-content-end">
+				<a appBackNav aria-current="page" class="active" data-toggle="tooltip" data-placement="top" title="Download">
+					<button type="button" class="btn btn-link btn-sm text-muted">← Go Back</button>
+				</a>
+			</div>
+		</div>
+	</header>
+	<div class="card-body">
+		<div class="container">
+			<div class="h2 text-center" [class.text-danger]="formErrors" [class.text-success]="msgId">CREATE NEW EVENT</div>
+			<form method="post" enctype="multipart/form-data" class="mt-2" (submit)="save(); false">
+				<div class="form-group mb-2">
+					<label class="d-none">Event Id</label>
+					<input
+						type="text" readonly
+						class="form-control-plaintext d-none"
+						[class.is-valid]="msgId"
+					>
+					<div class="valid-feedback">Event Created! click <a [routerLink]="['/environment-health-safety/view', msgId]">here</a> to view</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group mb-2">
+							<input
+								#desktopTag
+								type="checkbox"
+								class="form-check-input"
+								name="desktop"
+								(change)="setDesktopTag($event)"
+								[class.is-invalid]="formErrors?.message_hashtag" />
+							<label class="form-check-label" for="">&#160;Desktop</label>
+							<div *ngIf="formErrors?.message_hashtag && formErrors?.message_hashtag[0]" class="invalid-feedback">
+								{{formErrors?.message_hashtag[0]?.name}}
+							</div>
+						</div>
+						<div class="form-group mb-2">
+							<div class="row">
+								<div class="col">
+									<label><b>TO:</b> <span class="text-danger">*</span></label>
+								</div>
+							</div>
+							<div class="border rounded-1 p-1 text-left">
+								<app-staff-account-input [(ngModel)]="iEvent.recipients" name="recipients[]" multiple>
+									<input
+										type="text"
+										class="form-control p-1 border-bottom rounded-0 inputRecipients"
+										placeholder="enter recipients..."
+										[class.is-invalid]="formErrors?.message?.recipients"
+									/>
+									<div *ngIf="formErrors?.message?.recipients && formErrors?.message?.recipients[0]" class="invalid-feedback">
+										{{formErrors?.message?.recipients[0]}}
+									</div>
+								</app-staff-account-input>
+							</div>
+						</div>
+						<div class="form-group mb-2"> 
+							<label class="" for="text-location"><b>RISK LEVEL:</b></label>
+							<select class="form-control" name="severity" [class.is-invalid]="EHSErr?.risk_level" [(ngModel)]="iEvent.riskLevel">
+								<option *ngFor="let r of riskLevel" [value]="r?.id">{{r?.name}}</option>
+							</select>
+							<div *ngIf="EHSErr?.risk_level" class="invalid-feedback">{{EHSErr?.risk_level}}</div>
+						</div> 
+						<div class="form-group mb-2">
+							<label><b>TITLE:</b> <span class="text-danger">*</span></label>
+							<input
+								type="text"
+								class="form-control"
+								placeholder="Title here"
+								name="title"
+								[(ngModel)]="iEvent.title"
+								[class.is-invalid]="EHSErr?.title"
+							>
+							<div *ngIf="EHSErr?.title" class="invalid-feedback">{{EHSErr?.title}}</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="row form-group mb-2">
+					<div class="col">
+						<label class="" for="textarea-description"><b>DESCRIPTION:</b></label>
+						<textarea
+							class="form-control"
+							name="description"
+							rows="3"
+							placeholder="Message here..."
+							[(ngModel)]="iEvent.description"
+							[class.is-invalid]="EHSErr?.description">
+						</textarea>
+						<div *ngIf="EHSErr?.description" class="invalid-feedback">{{EHSErr?.description}}</div>
+					</div>
+				</div>
+				<div class="form-group mb-2">
+					<label><b>LOCATION:</b> <span class="text-danger">*</span></label>
+					<input
+						type="text"
+						class="form-control"
+						placeholder="Canada"
+						name="location"
+						[(ngModel)]="iEvent.location"
+						[class.is-invalid]="EHSErr?.location"
+					>
+					<div *ngIf="EHSErr?.location" class="invalid-feedback">{{EHSErr?.location}}</div>
+				</div>
+				<div class="row form-group mb-2">
+					<div class="col">
+						<label class=""><b>EVENT START:</b></label>
+						<div class="row">
+							<div class="col">
+								<app-date-picker
+									name="date_start"
+									useDefault="true"
+									[class.is-invalid]="EHSErr?.date_start"
+									[(ngModel)]="iEvent.dateStart"
+								>
+								</app-date-picker>
+								<div *ngIf="EHSErr?.date_start" class="invalid-feedback">{{EHSErr?.date_start}}</div>
+							</div>
+							<div class="col">
+								<input class="form-control" type="time" name="text-time" placeholder="enter time">
+							</div>
+						</div>
+					</div>
+					<div class="col">
+						<label class=""><b>EVENTS END:</b> <small>(optional)</small></label>
+						<div class="row">
+							<div class="col">
+								<app-date-picker
+									name="date_end"
+									[class.is-invalid]="EHSErr?.date_end"
+									[(ngModel)]="iEvent.dateEnd">
+								</app-date-picker>
+								<div *ngIf="EHSErr?.date_end" class="invalid-feedback">{{EHSErr?.date_end}}</div>
+							</div>
+							<div class="col">
+								<input class="form-control" type="time" name="text-time" placeholder="enter time">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row form-group">
+					<div class="col">
+						<label class=""><b>ADD FILES</b> (optional) </label>
+						<p class="d-none"><small>Type: pdf / jpg / ng / video</small></p>
+						<div class="col-md-12">
+							<input #attachmentFile class="custom-file-input" name="file-multiple-input" multiple="" type="file">
+							<label class="custom-file-label" for="file-multiple-input">Choose Files...</label>
+						</div>
+					</div>
+				</div>
+				<hr />
+				<div class="row form-group">
+					<div class="text-right col d-flex justify-content-end">
+						<button class="btn btn-primary mr-2" type="submit">Submit</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

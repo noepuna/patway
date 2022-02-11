@@ -1,0 +1,20 @@
+/* No CSS *//*# sourceMappingURL=login.component.css.map */
+
+.row {
+	justify-content: center;
+}
+
+.row > div {
+	margin-top: 15%;
+}
+
+/** brian */
+.loginBtn {
+	cursor: pointer;
+}
+.loginBtn:hover,
+.loginBtn:focus,
+.loginBtn:active {
+	color: #d69d53;
+  border: none;
+}

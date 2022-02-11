@@ -1,0 +1,62 @@
+<div class="toolbar" role="banner">
+	<img
+		width="120"
+		alt="Patway Logo"
+		src="assets/img/logo.png"
+	/> 
+	<ng-container *ngIf="loginStatusObs | async; else login">
+		<div class="spacer"></div>
+		<ng-container *ngIf="account?.isSuper; then superNav; else officeNav;"></ng-container>
+		<span>&#160;|&#160;</span>		 
+		<span class="topMenu dropdown-toggle" routerLink="/backoffice/admin/staff" data-bs-toggle="dropdown" aria-expanded="false" id="username" >
+			{{account?.firstname}} {{account?.lastname}}<i class="mx-0 bi bi-caret-down-fill"></i>
+		</span>
+		<ul class="dropdown-menu" aria-labelledby="username">
+			<li>
+				<button class="dropdown-item" type="button" routerLink="/account/settings">
+					Settings
+				</button>
+			</li>
+			<app-logout-btn>
+				<li>
+					<button class="dropdown-item" type="button">logout</button>
+				</li>
+			</app-logout-btn>
+		</ul>
+		<i class="fas profilePic">
+			<img class="profilePic" [src]="account?.profilePhoto?.url">
+		</i>
+	</ng-container>
+</div>
+
+<ng-template #login>
+	<div class="spacer"></div>  
+	<span routerLink="/backoffice/admin/login" class="topMenu">Admin</span>
+	<span routerLink="/login" class="topMenu">User</span>
+</ng-template>
+
+<!-- super admin -->
+<ng-template #superNav>
+	<span class="topMenu" routerLink="/backoffice/super/office/create">Create</span>
+	<span class="topMenu" routerLink="/backoffice/super/office/list">List</span> 
+</ng-template>
+
+<!-- user access -->
+<ng-template #officeNav>
+	<span class="topMenu" routerLink="/home">Home</span>
+	<span class="topMenu" routerLink="/project">Project</span>
+	<ng-container *ngIf="account?.isAdmin">
+		
+		<!-- admin access -->
+		<span class="topMenu dropdown-toggle" routerLink="/backoffice/admin/staff" data-bs-toggle="dropdown" aria-expanded="false" id="dropdownMenu" >
+			Updates <i class="bi bi-caret-down-fill"></i>
+		</span>
+		<ul class="dropdown-menu" aria-labelledby="dropdownMenu">
+			<li><button class="dropdown-item" routerLink="/backoffice/admin/environment-health-safety/list" type="button">EHS Category</button></li>
+			<li><button class="dropdown-item" routerLink="/backoffice/admin/department/search" type="button">Department</button></li>
+		</ul>
+		 
+		<span class="topMenu" routerLink="/backoffice/admin/staff">User</span>
+	</ng-container>
+	<span class="topMenu" routerLink="/support-ticket">Message</span>
+</ng-template>
