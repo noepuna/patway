@@ -6,7 +6,7 @@
 }
 
 .heading-2 {
-    color: #86a0ff;
+    color: #000000;
     font-size: 2rem;
     font-weight: 700;
     margin: 0 auto .5rem;
@@ -16,7 +16,7 @@
 }
 .heading-4 {
     font-size: 1.6rem;
-    color: #86a0ff;
+    color: #000000;
     margin: 0;
     font-weight: 600;
     text-transform: uppercase;
@@ -26,6 +26,17 @@
     font-weight: bold;
     opacity: 1;
 }
+ .container {
+    background-color: #000000;
+
+ }
+ body{
+    background-color: black;
+    color: black;
+ }
+ toolbar {
+     color: red;
+ }
 
 .iconLink {
     text-decoration: none;
@@ -42,11 +53,12 @@ a.iconLink img {
     width: 100%;
     font-size: 3rem;
     margin-bottom: .5rem;
-    color: #01478a;
+    color: #000000;
 }
 .iconLink p {
     margin-top: 0;
-    color: #ff9500; 
+    color: #ffffff; 
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .iconLinkNotDone {
@@ -63,5 +75,5 @@ a.iconLink img {
     height: 50px;
 }
 .yellow-orange-color {
-    color: #ff9500;
+    color: #ffffff;
 }
