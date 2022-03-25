@@ -7,6 +7,7 @@ export interface iObservation
 	supervisor ?: string
 	notes ?: string
 	recommendation ?: string
+	actionRequired ?: string
 	actionTaken ?: string
 	feedbackToCoworkers ?: string
 	createdBy ?: string

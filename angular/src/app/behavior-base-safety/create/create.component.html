@@ -8,7 +8,7 @@
 <div class="card">
 	<header class="card-header">
 		<div class="d-flex justify-content-between">
-			<div class="">CREATE BBS REPORT</div>
+			<div class="">CREATE BBS OBSERVATION</div>
 			<div appBackNav class="d-flex justify-content-end">
                 <button routerLink="/behavior-base-safety/status" class="btn-sm btn btn-outline-secondary float-right btn-sm" type="button">
                     Status
@@ -153,6 +153,20 @@
 							[class.is-invalid]="formErrors?.bbs_observation?.action_taken">
 						</textarea>
 						<div *ngIf="formErrors?.bbs_observation?.action_taken" class="invalid-feedback">{{formErrors.bbs_observation.action_taken}}</div>
+					</div>
+				</div>
+				<div class="row form-group mb-2">
+					<div class="col">
+						<label><b>ACTION REQUIRED:</b></label>
+						<textarea
+							class="form-control"
+							name="action_required"
+							[(ngModel)]="payload.actionRequired"
+							rows="3"
+							placeholder="message here..."
+							[class.is-invalid]="formErrors?.bbs_observation?.action_required">
+						</textarea>
+						<div *ngIf="formErrors?.bbs_observation?.action_required" class="invalid-feedback">{{formErrors.bbs_observation.action_required}}</div>
 					</div>
 				</div>
 				<div class="row form-group mb-2">

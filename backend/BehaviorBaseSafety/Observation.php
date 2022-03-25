@@ -52,6 +52,7 @@
 				'supervisor' => null,
 				'notes' => null,
 				'recommendation' => null,
+				'action_required' => null,
 				'action_taken' => null,
 				'feedback_to_coworkers' => null,
 				'properties' => [],
