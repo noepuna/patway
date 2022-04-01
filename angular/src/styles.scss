@@ -27,16 +27,16 @@
     opacity: 1;
 }
  .container {
-    background-color: #000000;
+   
 
  }
  body{
-    background-color: black;
+    
     color: black;
     font-style: white;
  }
  toolbar {
-     color: red;
+     color: #093c71;
  }
 
 .iconLink {
@@ -78,3 +78,51 @@ a.iconLink img {
 .yellow-orange-color {
     color: #ffffff;
 } 
+
+/* SIBLING FADE: fade out siblings around a hovered item */
+
+.sibling-fade { visibility: hidden; }
+/* Prevents :hover from triggering in the gaps between items */
+
+.sibling-fade > * { visibility: visible; }
+/* Brings the child items back in, even though the parent is `hidden` */
+
+.sibling-fade > * { transition: opacity 150ms linear 100ms, transform 150ms ease-in-out 100ms; }
+/* Makes the fades smooth with a slight delay to prevent jumps as the mouse moves between items */
+
+.sibling-fade:hover > * { opacity: 0.4; transform: scale(0.9); }
+/* Fade out all items when the parent is hovered */
+
+.sibling-fade > *:hover { opacity: 1; transform: scale(1); transition-delay: 0ms, 0ms; }
+/* Fade in the currently hovered item */
+
+
+
+
+
+
+
+
+.sibling-fade {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.sibling-fade > * {
+  background: #093c71;
+  padding: 1em;
+  flex: auto;
+  margin: 0.3em;
+  text-align: center;
+  color: #f05555;
+  font-size: 1.5em;
+  text-decoration: none;
+}
+
+/**/
+
+
+
+
+
+
