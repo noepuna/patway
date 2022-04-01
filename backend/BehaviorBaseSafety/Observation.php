@@ -52,6 +52,10 @@
 				'supervisor' => null,
 				'notes' => null,
 				'recommendation' => null,
+<<<<<<< HEAD
+				'action_required' => null,
+=======
+>>>>>>> 50cddb0018e73587d801050aa03ad33cec65b210
 				'action_taken' => null,
 				'feedback_to_coworkers' => null,
 				'properties' => [],
